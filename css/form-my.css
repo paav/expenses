@@ -1,0 +1,51 @@
+form textarea {
+  resize: none;
+}
+
+form label {
+  display: inline-block;
+  text-align: right;
+  font-weight: bold;
+  margin-right: 20px;
+  width: 8em;  
+}
+
+form textarea {
+  vertical-align: top;
+}
+
+.row {
+  margin-bottom: 15px;
+}
+
+table.selectable {
+  border-collapse: collapse;
+}
+
+table.selectable a {
+  text-decoration: none;
+  color: grey;
+}
+
+table.selectable .link {
+  padding: 2px 5px;
+}
+
+table.selectable a:hover {
+  color: #000;
+}
+
+table.selectable th {
+  text-align: left;
+}
+
+table.selectable td,
+table.selectable th {
+  padding-left: 10px;
+  padding-right: 30px;
+  border: 1px solid #ccc;
+}
+
+table.selectable .radio {
+  padding: 0;
+}

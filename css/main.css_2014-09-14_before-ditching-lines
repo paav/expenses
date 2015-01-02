@@ -1,0 +1,228 @@
+body {
+  font-family: Verdana,Geneva,sans-serif;
+  font-size: small;
+  color: #454545;
+  background: #F5F5F5;
+}
+#container {
+  width: 90%;
+  margin-left: 5%;
+  background: #fff;
+  border: thin solid #CCC;
+//  border-top: 5px solid #CCC;
+}
+#header {
+  padding-top: 10px;
+  padding-bottom: 10px;
+  text-align: center;
+}
+.filter {
+  float: left;
+}
+.bold {
+  font-weight: bold;
+  color: black;
+}
+.navigation {
+  float: right;
+}
+img {
+//  border: 1px solid black;
+  margin-bottom: -4px;
+}
+img:hover {
+  transform-origin: 0% 100%;
+  -webkit-transform-origin: 0% 100%;
+  transform: rotate(-3deg);
+  -webkit-transform: rotate(-3deg);
+}
+h1 { 
+  margin: 0;
+//  font-family: Arial;
+//  text-shadow: 1px 1px 1px rgba(0,0,0,1);
+//  font-family: 'Alegreya Sans SC', sans-serif;
+  font-family: 'Alegreya Sans', sans-serif;
+//  font-family: 'Bowlby One SC', cursive;
+  font-weight: bold;
+  font-size: 1.8em;
+  display: inline-block;
+//  font-variant: small-caps;
+//  color: #454545;
+  color: black;
+  cursor: default;
+  user-select: none;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+}
+#content {
+  width: 95%;
+  margin-left: 2.5%;
+//  height: 500px;
+  padding: 10px 0;
+  border-top: thin solid #CCC;
+  border-bottom: thin solid #CCC;
+  color: #454545;
+}
+table.expenses-list {
+  width: 100%;
+  border-collapse: collapse;
+//  border: thin solid #CCC;
+  margin-top: 12px;
+  margin-bottom: 12px;
+}
+table.expenses-list thead {
+  background-color: LightGrey;
+}
+table.expenses-list th {
+//  border: thin solid black;
+  text-align: left;
+  padding: 10px 10px;
+}
+table.expenses-list thead th.cost {
+//  text-align: center;
+}
+table.expenses-list td.cost {
+  text-align: right;
+}
+table.expenses-list tbody tr {
+  border-bottom: 1px solid GainSboro;
+}
+table.expenses-list tbody tr:hover {
+  background-color: WhiteSmoke;
+}
+table.expenses-list tr td {
+//  border: thin solid black;
+  padding: 10px 10px;
+  padding-right: 20px;
+}
+a {
+  text-decoration: none;
+}
+a.icon-pencil {
+  font-size: 1em;
+  font-weight: normal;
+  color: Grey;
+}
+a.icon-pencil:hover {
+  color: black;
+}
+table.expenses-list tbody td.descr {
+  max-width: 20em;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+table.expenses-list tbody tr {
+//  color: #0066FF;
+//  text-decoration: underline;
+//  cursor: pointer;
+//  user-select: none;
+//  -webkit-touch-callout: none;
+//  -webkit-user-select: none;
+//  -khtml-user-select: none;
+//  -moz-user-select: none;
+//  -ms-user-select: none;
+}
+table.expenses-list tbody tr:hover {
+//  background: #F0F0F0;
+//  text-decoration: underline;
+}
+table.expenses-list tbody tr:active {
+//  border: 2px solid #66A3FF;
+}
+table.expenses-list .hidden {
+  display: none;
+}
+form#expenses-form textarea {
+  resize: none;
+}
+table td.cmds {
+  border: thin solid #CCC;
+  padding: 0 5px;
+}
+table tr {
+  padding: 0;
+}
+#footer {
+  text-align: center;
+  padding: 10px 0 25px;
+  color: black;
+}
+table.update {
+  border: 0;
+}
+
+table.update th {
+  border: 0;
+  text-align: right;
+  padding: 0 10px 10px 0;
+}
+
+table.update td {
+  border: 0;
+  text-align: left;
+  padding: 0 0 10px 0;
+}
+a.button {
+  background: #EEEEEE;
+  border: 1px solid #CFCFCF;
+//  color: #454545;
+  color: Grey;
+  text-decoration: none;
+  display: inline-block;
+}
+a.button:hover {
+  border-color: #B8B8B8;
+}
+#expenses-form label {
+  display: inline-block;
+  text-align: right;
+  font-weight: bold;
+  margin-right: 20px;
+  width: 80px;  
+}
+#expenses-form .row {
+  margin-bottom: 15px;
+}
+.descr * {
+  vertical-align: top;
+}
+input[type=submit]:hover {
+  background: #A62900;
+}
+input[type=submit] {
+  background: #B82E00;
+  color: #fff;
+}
+.button:hover {
+  box-shadow: 0 1px 1px rgba(0,0,0,.2);
+}
+.button {
+  font-family: Arial;
+  margin: 5px;
+  border: 1px solid #812000;
+  letter-spacing: -.05em;
+  font-weight: bold;
+  padding: 6px;
+  margin: 0;
+}
+.button[class*="icon"] {
+  font-size: 1.4em;
+}
+.button[class*="icon"] + .button[class*="icon"] {
+  border-left-style: none;
+}
+.disabled {
+  pointer-events: none;
+  cursor: default;
+  color: Gainsboro !important;
+}
+a.button:hover {
+  color: black;
+}
+input[id|=cal] {
+  width: 6em;
+}

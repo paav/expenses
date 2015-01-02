@@ -1,0 +1,59 @@
+div.js-calendar {
+  font-family: sans-serif;
+}
+div.js-calendar table {
+  background: #fff;
+  border: 1px solid #a3a3a3; 
+}
+div.js-calendar table tr.month {
+  color: #000099;
+}
+div.js-calendar .date-cell:hover {
+  background: #ccc;
+}
+div.js-calendar td,th {
+  border: none;
+  cursor: default;
+}
+div.js-calendar td {
+  padding: 2px;
+  text-align: center; 
+}
+div.js-calendar th {
+  padding: 0 4px 4px 4px;
+  text-align: center;
+}
+div.js-calendar .date-cell.today-cell {
+  font-weight: bold;
+  border: 1px solid black;
+}
+div.js-calendar .date-cell.selected-cell {
+  background: #ccc;
+}
+#calendar-place-div {
+  position: relative;
+}
+
+#calendar-inner-div {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  background: white;
+}
+
+#calendar-inner-div table {
+  border: 1px solid black;
+}
+
+#calendar-inner-div td { 
+}
+
+#calendar-inner-div th {
+}
+
+#current-date {
+  border: 1px solid black;
+  font-weight: bold;
+}
+
+
