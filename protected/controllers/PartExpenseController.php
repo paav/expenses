@@ -73,65 +73,9 @@ class PartExpenseController extends Controller
 		// $this->performAjaxValidation($model);
 
         $model = new PartExpense;
+        $model->quantity = 1;
 
-		if(isset($_POST['PartExpense']))
-		{ 
-			$model->attributes=$_POST['PartExpense'];
-            $model->expense_type_id = Expense::TYPE_PART;
-            $model->validate();
-
-			if($model->save()) {
-                if(isset($_POST['boundIds']))
-                    Expense::model()->updateByPk($_POST['boundIds'], array('bound_id'=>$model->id));
-
-				$this->redirect(array('view','id'=>$model->id));
-            }
-		}
-
-        $contractorsDp = new CActiveDataProvider('Contractor', array(
-            'criteria'=>array(
-                'scopes'=>array('type'=>array(Contractor::TYPE_STORE))
-            ),
-        ));
-
-        $parts = Part::model()->findAll(); 
-        $jobs = Job::model()->findAll(); 
-        $contractors = Contractor::model()->type(Contractor::TYPE_STORE)
-                                          ->findAll();
-
-        $jobsDp = new CActiveDataProvider('Job'); 
-        $expenses = Expense::model()->findAll('part_id IS NOT NULL OR job_id IS NOT NULL');
-        $connectedExpenses = JobExpense::model()->findAll('bound_id=:id', array(
-            ':id'=>$model->id,
-        ));
-        $expensesDp = new CActiveDataProvider(('job' == 'part') ? 'PartExpense' : 'PartExpense');
-        $allExpensesDp = new CActiveDataProvider('PartExpense', array(
-            'criteria' => array(
-                'condition' => 'bound_id IS NULL',
-            )
-        ));
-
-        $connectedExpensesDp = new CActiveDataProvider('PartExpense', array(
-            'criteria' => array(
-                'condition' => 'bound_id=:thisId',
-                'params' => array(':thisId' => $model->id),
-            )
-        ));
-
-        $this->render('create',array(
-            'expenseType'=>'job',
-            'model'=>$model,
-            'parts'=>$parts,
-            'jobs'=>$jobs,
-            'contractors'=>$contractors,
-            'jobsDp'=>$jobsDp,
-            'expenses'=>$expenses,
-            'contractorsDp'=>$contractorsDp,
-            'expensesDp'=>$expensesDp,
-            'connectedExpensesDp'=>$connectedExpensesDp,
-            'connectedExpenses'=>$connectedExpenses,
-            'allExpensesDp'=>$allExpensesDp,
-        ));
+        $this->handleRequest($model);
 	}
 
 	/**
@@ -146,58 +90,7 @@ class PartExpenseController extends Controller
 
         $model = PartExpense::model()->findByPk($id);
 
-		if(isset($_POST['PartExpense']))
-		{
-			$model->attributes=$_POST['PartExpense'];
-
-			if($model->save()) {
-				$this->redirect(array('view','id'=>$model->id));
-            }
-		}
-
-        $contractorsDp = new CActiveDataProvider('Contractor', array(
-            'criteria'=>array(
-                'scopes'=>array('type'=>array(Contractor::TYPE_STORE))
-            ),
-        ));
-
-        $parts = Part::model()->findAll(); 
-        $jobs = Job::model()->findAll(); 
-        $contractors = Contractor::model()->type(Contractor::TYPE_STORE)->findAll();
-        $connectedExpenses = PartExpense::model()->findAll('bound_id=:id', array(
-            ':id'=>$model->id,
-        ));  
-
-        $jobsDp = new CActiveDataProvider('Job'); 
-        $expenses = Expense::model()->findAll('part_id IS NOT NULL OR job_id IS NOT NULL');
-        //$connectedExpensesDp = new CActiveDataProvider(('job' == 'part') ? 'PartExpense' : 'PartExpense');
-        $connectedExpensesDp = new CActiveDataProvider('PartExpense', array(
-            'criteria' => array(
-                'condition' => 'bound_id=:thisId',
-                'params' => array(':thisId' => $model->id),
-            )
-        ));
-
-        $allExpensesDp = new CActiveDataProvider('PartExpense', array(
-            'criteria' => array(
-                'condition' => 'bound_id<>:thisId',
-                'params' => array(':thisId' => $model->id),
-            )
-        ));
-
-        $this->render('create',array(
-            'expenseType'=>'job',
-            'model'=>$model,
-            'parts'=>$parts,
-            'jobs'=>$jobs,
-            'contractors'=>$contractors,
-            'jobsDp'=>$jobsDp,
-            'expenses'=>$expenses,
-            'contractorsDp'=>$contractorsDp,
-            'connectedExpensesDp'=>$connectedExpensesDp,
-            'connectedExpenses'=>$connectedExpenses,
-            'allExpensesDp'=>$allExpensesDp,
-        ));
+        $this->handleRequest($model);
 	}
 
 	/**
@@ -267,4 +160,35 @@ class PartExpenseController extends Controller
 			Yii::app()->end();
 		}
 	}
+
+
+	/**
+	 * My methods are below
+	 */
+
+    protected function handleRequest($model)
+    {
+		if (isset($_POST['PartExpense'])) { 
+
+			$model->attributes=$_POST['PartExpense'];
+            $model->expense_type_id = Expense::TYPE_PART;
+
+			if ($model->save()) {
+                if (isset($_POST['boundIds']))
+                    Expense::model()->updateByPk($_POST['boundIds'], array('bound_id'=>$model->id));
+
+				$this->redirect(array('view','id'=>$model->id));
+            }
+        }
+
+        $partsAll = Part::model()->findAll(); 
+        $jobsAll = Job::model()->findAll(); 
+        $storesAll= Contractor::model()->type(Contractor::TYPE_STORE)->findAll();
+
+        $this->render('edit',array(
+            'model'=>$model,
+            'partsAll'=>$partsAll,
+            'storesAll'=>$storesAll,
+        ));
+    }
 }

@@ -95,7 +95,8 @@ class PartExpense extends Expense
 		return parent::model($className);
 	}
 
-    public function defaultScope() {
+    public function defaultScope()
+    {
         return array(
             'condition' => 'expense_type_id=:type',
             'params' => array(':type' => self::TYPE_PART),
@@ -105,6 +106,7 @@ class PartExpense extends Expense
     protected function afterFind()
     {
         $this->cost = $this->quantity * $this->unit_price;
+        $this->descr = $this->part->type->name . ' ' . $this->part->name;   
 
         return parent::afterFind();
     }
