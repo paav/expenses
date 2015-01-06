@@ -47,17 +47,17 @@ class ExpenseController extends Controller
 	 */
 	public function actionView($id)
 	{
-        $relatedExpensesDp = new CActiveDataProvider('Expense', array(
-            'criteria'=>array(
-                'condition'=>'bound_id=:id',
-                'params'=>array(':id'=>$id),
-            )
-        ));
+        //$relatedExpensesDp = new CActiveDataProvider('Expense', array(
+            //'criteria'=>array(
+                //'condition'=>'bound_id=:id',
+                //'params'=>array(':id'=>$id),
+            //)
+        //));
 
-		$this->render('//expense/view',array(
-			'model'=>$this->loadModel($id),
-            'relatedExpenses'=>$relatedExpensesDp,
-		));
+		//$this->render('//expense/view',array(
+			//'model'=>$this->loadModel($id),
+            //'relatedExpenses'=>$relatedExpensesDp,
+		//));
 	}
 
 	/**
@@ -229,7 +229,7 @@ class ExpenseController extends Controller
 		$this->loadModel($id)->delete();
 		// if AJAX request (triggered by deletion via admin grid view), we should not redirect the browser
 		if(!isset($_GET['ajax']))
-            $this->redirect(array('site/index'));
+            $this->redirect(array('expense/index'));
 			//$this->redirect(isset($_POST['returnUrl']) ? $_POST['returnUrl'] : array('admin'));
 	}
 
@@ -238,17 +238,28 @@ class ExpenseController extends Controller
 	 */
 	public function actionIndex()
 	{
+        $criteria = new CDbCriteria(array('order' => 'date ASC'));
+        $count = Expense::model()->count($criteria);
+
+        $pages = new CPagination($count);
+        $pages->pageSize = 10;
+        $pages->applyLimit($criteria);
+
+        $allExpenses = Expense::model()->findAll($criteria);
+
 		$allExpensesDp = new CActiveDataProvider('Expense',array(
-            'criteria'=>array(
-                'order'=>'date ASC',
+            'criteria' => array(
+                'order' => 'date ASC',
             ),
-            'pagination'=>array(
-                'pageSize'=>50,
+            'pagination' => array(
+                'pageSize' => 20,
             ),
         ));
 
 		$this->render('index',array(
-			'allExpensesDp'=>$allExpensesDp,
+            'allExpenses' => $allExpenses,
+			'allExpensesDp'=> $allExpensesDp,
+            'pages' => $pages
 		));
 	}
 

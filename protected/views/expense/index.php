@@ -1,86 +1,39 @@
-# vim: ts=2:sw=2:sts=2
-<?php yii::app()->clientScript->registerCssFile('http://i.icomoon.io/public/temp/7b7d465304/UntitledProject1/style.css'); ?>
-
-<p>Все расходы</p> 
-
-<?php $this->widget('zii.widgets.grid.CGridView', array(
-  'dataProvider'=>$allExpensesDp,
-  'nullDisplay'=>'нет',
-  'enableSorting'=>false,
-  'cssFile'=>Yii::app()->baseUrl.'/css/grid-index.css',
-  'columns'=>array(
-    /*
-    array(
-      'id'=>'boundIds',
-      'class'=>'CCheckBoxColumn',
-      'value'=>'$data->id',
-      'checked'=>'($data->bound_id == 19)',
-    ),
-    */
-//    'id',
-    array(
-      'id'=>'date',
-      'name'=>'date',
-      'type'=>'date',
-      'headerHtmlOptions'=>array('class'=>'date'),
-      'htmlOptions'=>array('class'=>'date'),
-      'footer'=>'Итого:',
-    ),
-    array(
-      'id'=>'run',
-      'name'=>'run',
-      'type'=>'run',
-      'htmlOptions'=>array('class'=>'run align-right'),
-      'headerHtmlOptions'=>array('class'=>'run align-right'),
-      'footerHtmlOptions'=>array('class'=>'run align-right'),
-      'footer'=>yii::app()->format->run(Expense::getTotalRun($allExpensesDp)),
-    ),
-    array(
-      'id'=>'type',
-      'name'=>'type.name',
-      'htmlOptions'=>array('class'=>'type'),
-      'headerHtmlOptions'=>array('class'=>'type'),
-    ),
-    array(
-      'id'=>'cost',
-      'name'=>'cost',
-      'type'=>'price', 
-      'htmlOptions'=>array('class'=>'cost align-right'),
-      'headerHtmlOptions'=>array('class'=>'cost align-right'),
-      'footerHtmlOptions'=>array('class'=>'cost align-right'),
-      'footer'=>yii::app()->format->price(Expense::getTotalCost($allExpensesDp)),
-    ),
-    //'quantity',
-    //'unit_price',
-    array(
-      'id'=>'descr',
-      'header'=>'Описание',
-      'htmlOptions'=>array('class'=>'descr'),
-      'headerHtmlOptions'=>array('class'=>'descr'),
-      'value'=>function($data){
-        switch($data->expense_type_id):
-          case Expense::TYPE_JOB:
-            return $data->job->name;
-          case Expense::TYPE_PART:
-            return $data->part->type->name.' '.$data->part->name;   
-        endswitch;
-      },
-    ),
-    array(
-      'class'=>'CLinkColumn',
-      'label'=>'',
-      'urlExpression'=>function($data){
-         return $this->createAbsoluteUrl($data->controllerName.'/view',array('id'=>$data->id));
-      },
-      'linkHtmlOptions'=>array('class'=>'icon-search'),
-    ),
-    array(
-      'class'=>'CLinkColumn',
-      'label'=>'',
-      'urlExpression'=>function($data){
-        return $this->createAbsoluteUrl($data->controllerName.'/update',array('id'=>$data->id));
-      },
-      'linkHtmlOptions'=>array('class'=>'icon-pen'),
-    ),
-  ),
-)); ?> 
+<?php
+// vim: ts=2:sw=2:sts=2:ft=htmlphp
+/**
+ * @var $this ExpenseController
+ * @var $allExpense array of Expense objects
+ */
+?>
+<h1>Все расходы</h1> 
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>Дата
+      <th>Пробег
+      <th>Тип расхода
+      <th>Стоимость
+      <th>Описание
+      <th>
+  <tbody>
+    <?php foreach ($allExpenses as $expense): ?>
+    <tr>
+      <td><?php echo yii::app()->dateFormatter->format('dd.MM.yyyy', $expense->date); ?>
+      <td><?php echo $expense->run ? $expense->run . ' км' : 'нет'; ?>
+      <td><?php echo $expense->expenseType->name; ?>
+      <td><?php echo $expense->cost; ?> руб.
+      <td><?php echo $expense->descr; ?>
+          <?php $ctrl = $expense->type == Expense::TYPE_JOB ? 'JobExpense'
+                                                            : 'PartExpense'; ?>
+      <td><a href="<?php echo $this->createAbsoluteUrl($ctrl . '/view', array(
+                           'id'=>$expense->id));
+                   ?>"><i class="fa fa-search fa-lg"></i></a>
+      <td><a href="<?php echo $this->createAbsoluteUrl($ctrl . '/update', array(
+                           'id'=>$expense->id));
+                   ?>"><i class="fa fa-edit fa-lg"></i></a>
+      <td><a href="<?php echo $this->createAbsoluteUrl('Expense/delete', array(
+                           'id'=>$expense->id));
+                   ?>"><i class="fa fa-remove fa-lg"></i></a>
+    <?php endforeach; ?>
+</table>
+<?php $this->widget('CLinkPager', array('pages'=>$pages)); ?>
