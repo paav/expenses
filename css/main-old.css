@@ -2,7 +2,7 @@ body {
   font-family: Verdana,Geneva,sans-serif;
   font-size: small;
   color: #454545;
-  background: #F5F5F5;
+  /*background: #F5F5F5;*/
   margin: 0;
 }
 #container {
@@ -101,7 +101,13 @@ table.expenses-list tr td {
 }
 a {
   text-decoration: none;
+  color: #0052CC;
 }
+
+a:hover {
+  text-decoration: underline;
+}
+
 a.icon-pencil {
   font-size: 1em;
   font-weight: normal;
@@ -136,9 +142,6 @@ table.expenses-list tbody tr:active {
 }
 table.expenses-list .hidden {
   display: none;
-}
-form#expenses-form textarea {
-  resize: none;
 }
 table td.cmds {
   border: thin solid #CCC;
@@ -178,26 +181,6 @@ a.button {
 a.button:hover {
   border-color: #B8B8B8;
 }
-#expenses-form label {
-  display: inline-block;
-  text-align: right;
-  font-weight: bold;
-  margin-right: 20px;
-  width: 80px;  
-}
-#expenses-form .row {
-  margin-bottom: 15px;
-}
-.descr * {
-  vertical-align: top;
-}
-input[type=submit]:hover {
-  background: #A62900;
-}
-input[type=submit] {
-  background: #B82E00;
-  color: #fff;
-}
 .button:hover {
   box-shadow: 0 1px 1px rgba(0,0,0,.2);
 }
@@ -227,3 +210,32 @@ a.button:hover {
 input[id|=cal] {
   width: 6em;
 }
+
+.holder {
+  overflow: hidden;
+  clear: both;
+}
+
+.holder .even-height {
+  float: left;
+  padding-bottom: 100000px;
+  margin-bottom: -100000px;
+}
+
+.left-column {
+  width: 10em;
+}
+
+.right-column {
+}
+
+div.part {
+  width: 40%;
+  float: left;
+}
+
+div.job {
+  width: 60%;
+  float: left;
+}
+

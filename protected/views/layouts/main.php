@@ -1,12 +1,17 @@
-<!-- # vim: ts=2:sw=2:sts=2
---!>
-<?php /* @var $this Controller */ ?>
-<?php $baseUrl=Yii::app()->request->baseUrl; ?>
+<?php
+// vim: ts=2:sw=2:sts=2:ft=htmlphp
+// @var $this Controller
+
+// TODO: move to php file.
+$baseUrl = Yii::app()->request->baseUrl;
+?>
 <!DOCTYPE html>
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <link rel="stylesheet" href="<?php echo $baseUrl; ?>/css/menu.css">
-    <link rel="stylesheet" href="<?php echo $baseUrl; ?>/css/main.css">
+
+<link href="<?php echo $baseUrl; ?>/css/main-old.css" rel="stylesheet">
+<link href="<?php echo $baseUrl; ?>/css/main.css" rel="stylesheet">
     <link rel="stylesheet" href="<?php echo $baseUrl; ?>/js/calendar.css">
     <link rel="stylesheet" href="http://i.icomoon.io/public/temp/8b4d9e3f75/UntitledProject1/style.css">
     <link href='http://fonts.googleapis.com/css?family=Alegreya+Sans+SC:400,900|Alegreya+Sans:400,900|Bowlby+One+SC' rel='stylesheet' type='text/css'>
