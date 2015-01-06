@@ -6,7 +6,7 @@
  */
 ?>
 <h1>Все расходы</h1> 
-<table class="table table-striped">
+<table class="table table-bordered table-hover">
   <thead>
     <tr>
       <th>Дата
@@ -14,26 +14,26 @@
       <th>Тип расхода
       <th>Стоимость
       <th>Описание
-      <th>
+      <th colspan="3">
   <tbody>
     <?php foreach ($allExpenses as $expense): ?>
     <tr>
       <td><?php echo yii::app()->dateFormatter->format('dd.MM.yyyy', $expense->date); ?>
-      <td><?php echo $expense->run ? $expense->run . ' км' : 'нет'; ?>
+      <td class="text-right"><?php echo $expense->run ? $expense->run . ' км' : 'нет'; ?>
       <td><?php echo $expense->expenseType->name; ?>
-      <td><?php echo $expense->cost; ?> руб.
+      <td class="text-right"><?php echo $expense->cost; ?> руб.
       <td><?php echo $expense->descr; ?>
           <?php $ctrl = $expense->type == Expense::TYPE_JOB ? 'JobExpense'
                                                             : 'PartExpense'; ?>
-      <td><a href="<?php echo $this->createAbsoluteUrl($ctrl . '/view', array(
+      <td class="cell-action"><a href="<?php echo $this->createAbsoluteUrl($ctrl . '/view', array(
                            'id'=>$expense->id));
-                   ?>"><i class="fa fa-search fa-lg"></i></a>
-      <td><a href="<?php echo $this->createAbsoluteUrl($ctrl . '/update', array(
+                   ?>"><i class="fa fa-search fa-lg hover-scale"></i></a>
+      <td class="cell-action"><a href="<?php echo $this->createAbsoluteUrl($ctrl . '/update', array(
                            'id'=>$expense->id));
-                   ?>"><i class="fa fa-edit fa-lg"></i></a>
-      <td><a href="<?php echo $this->createAbsoluteUrl('Expense/delete', array(
+                   ?>"><i class="fa fa-edit fa-lg hover-scale"></i></a>
+      <td class="cell-action"><a href="<?php echo $this->createAbsoluteUrl('Expense/delete', array(
                            'id'=>$expense->id));
-                   ?>"><i class="fa fa-remove fa-lg"></i></a>
+                   ?>"><i class="fa fa-remove fa-lg hover-scale"></i></a>
     <?php endforeach; ?>
 </table>
 <?php $this->widget('CLinkPager', array('pages'=>$pages)); ?>

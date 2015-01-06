@@ -15,27 +15,29 @@ $baseUrl = Yii::app()->request->baseUrl;
 <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
 <link href="//fonts.googleapis.com/css?family=Alegreya+Sans+SC:400,900|Alegreya+Sans:400,900|Bowlby+One+SC" rel="stylesheet">
 <title><?php echo $this->pageTitle; ?></title>
-<nav class="navbar navbar-default">
-  <ul class="nav navbar-nav">
-    <li class="dropdown">
-      <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-        Показать <span class="caret"></span>
-      </a>
-      <ul class="dropdown-menu" role="menu">
-        <li><a href="<?php echo $this->createAbsoluteUrl('expense/index'); ?>">Все расходы</a></li>
-      </ul>
-    </li>
-    <li class="dropdown">
-      <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-        Создать <span class="caret"></span>
-      </a>
-      <ul class="dropdown-menu" role="menu">
-        <li><a href="<?php echo $this->createAbsoluteUrl('jobExpense/create'); ?>">Расход на работу</a></li>
-        <li><a href="<?php echo $this->createAbsoluteUrl('partExpense/create'); ?>">Расход на запчасть</a></li>
-      </ul>
-    </li>
-  </ul>
-</nav>
+<div class="container">
+  <nav class="nav-main">
+    <ul class="nav nav-pills">
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+          Показать <span class="caret"></span>
+        </a>
+        <ul class="dropdown-menu" role="menu">
+          <li><a href="<?php echo $this->createAbsoluteUrl('expense/index'); ?>">Все расходы</a></li>
+        </ul>
+      </li>
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+          Создать <span class="caret"></span>
+        </a>
+        <ul class="dropdown-menu" role="menu">
+          <li><a href="<?php echo $this->createAbsoluteUrl('jobExpense/create'); ?>">Расход на работу</a></li>
+          <li><a href="<?php echo $this->createAbsoluteUrl('partExpense/create'); ?>">Расход на запчасть</a></li>
+        </ul>
+      </li>
+    </ul>
+  </nav>
+</div>
 <main class="container">
   <?php echo $content; ?>
 </main>

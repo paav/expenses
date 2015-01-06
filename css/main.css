@@ -1,3 +1,9 @@
-import h1 {
-  color: red !important;
+.nav-main {
+  margin: 0 0 20px 0;
+}
+.hover-scale {
+  transition: all 0.2s ease-in-out;
+}
+.hover-scale:hover {
+  transform: scale(1.5);
 }
