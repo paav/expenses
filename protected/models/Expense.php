@@ -24,6 +24,9 @@ class Expense extends CActiveRecord
     const TYPE_PART = 1;
     const TYPE_JOB = 2;
 
+    public $descr = '';
+    public $type = '';
+
 	/**
 	 * @return string the associated database table name
 	 */
@@ -37,10 +40,11 @@ class Expense extends CActiveRecord
      * @return Car
      */
     protected function instantiate($attributes){
-        if (!isset($attributes['expense_type_id']))
-            $class = get_class($this);
-        else {
-            switch($attributes['expense_type_id']){
+        if (isset($attributes['expense_type_id'])) {
+
+            $type = $attributes['expense_type_id'];
+
+            switch ($type) {
                 case self::TYPE_PART:
                     $class = 'PartExpense';
                     break;
@@ -49,9 +53,11 @@ class Expense extends CActiveRecord
                     $class = 'JobExpense';
                     break;
             }
-        }
+        } else
+            $class = get_class($this);
 
         $model = new $class(null);
+        $model->type = isset($type) ? $type : null;  
 
         return $model;
     }
@@ -64,7 +70,9 @@ class Expense extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('expense_type_id, contractor_id, date', 'required'),
+			array('expense_type_id, date', 'required'),
+            array('contractor_id', 'required',
+                'message' => 'Выберите мастерскую!'),
 			array('run, contractor_id, bound_id', 'numerical', 'integerOnly'=>true),
 			array('cost', 'numerical', 'min'=>0, 'max'=>999999.99),
             array('run', 'numerical', 'min'=>0, 'max'=>999999),
@@ -84,7 +92,7 @@ class Expense extends CActiveRecord
 		// class name for the relations automatically generated below.
 		return array(
 			'contractor' => array(self::BELONGS_TO, 'Contractor', 'contractor_id'),
-            'type' => array(self::BELONGS_TO, 'ExpenseType', 'expense_type_id'),
+            'expenseType' => array(self::BELONGS_TO, 'ExpenseType', 'expense_type_id'),
 		);
 	}
 

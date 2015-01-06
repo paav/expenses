@@ -111,4 +111,11 @@ class JobExpense extends Expense
         );
     }
 
+    protected function afterFind()
+    {
+        if ($this->job)
+            $this->descr = $this->job->name;
+
+        return parent::afterFind();
+    }
 }

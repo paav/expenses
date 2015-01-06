@@ -70,78 +70,9 @@ class JobExpenseController extends Controller
 		// $this->performAjaxValidation($model);
 
         $model = new JobExpense;
+        $model->run = JobExpense::model()->maxRun()->find()->run ?: null;
 
-		if(isset($_POST['JobExpense']))
-		{
-			$model->attributes=$_POST['JobExpense'];
-            $model->expense_type_id = Expense::TYPE_JOB;
-
-			if($model->save()) {
-                if (isset($_POST['idsToBind']))
-                    Expense::model()->updateByPk($_POST['idsToBind'],
-                        array('bound_id'=>$model->id));
-                
-                if (isset($_POST['idsToUnbind']))
-                    Expense::model()->updateByPk($_POST['idsToUnbind'],
-                        array('bound_id'=>'NULL'));
-
-                if (isset($_POST['bind']) || isset($_POST['unbind']))
-                    $this->redirect(array('update','id'=>$model->id));
-                else
-                    $this->redirect(array('view','id'=>$model->id));
-            } else {
-                echo '<pre>';
-                var_dump($model->getErrors());
-                exit();
-            }
-		}
-
-        $model = JobExpense::model()->maxRun()->find() ?: $model;
-
-        $contractorsDp = new CActiveDataProvider('Contractor', array(
-            'criteria'=>array(
-                'condition'=>'type_id=:id',
-                'params'=>array(':id'=>Contractor::TYPE_GARAGE),
-            ),
-        ));
-
-        $parts = Part::model()->findAll(); 
-        $jobs = Job::model()->findAll(); 
-        $contractors = Contractor::model()->type(Contractor::TYPE_GARAGE)
-                                          ->findAll();
-        $jobsDp = new CActiveDataProvider('Job'); 
-        $expenses = Expense::model()->findAll('part_id IS NOT NULL OR job_id IS NOT NULL');
-        $connectedExpenses = Expense::model()->findAll('bound_id=:id', array(
-            ':id'=>$model->id,
-        ));
-        $expensesDp = new CActiveDataProvider(('job' == 'part') ? 'JobExpense' : 'PartExpense');
-        $allExpensesDp = new CActiveDataProvider('PartExpense', array(
-            'criteria' => array(
-                'condition' => 'bound_id IS NULL',
-            )
-        ));
-
-        $connectedExpensesDp = new CActiveDataProvider('PartExpense', array(
-            'criteria' => array(
-                'condition' => 'bound_id=:id',
-                'params' => array(':id' => $model->id),
-            )
-        ));
-
-        $this->render('create',array(
-            'expenseType'=>'job',
-            'model'=>$model,
-            'parts'=>$parts,
-            'jobs'=>$jobs,
-            'contractors'=>$contractors,
-            'jobsDp'=>$jobsDp,
-            'expenses'=>$expenses,
-            'contractorsDp'=>$contractorsDp,
-            'expensesDp'=>$expensesDp,
-            'connectedExpensesDp'=>$connectedExpensesDp,
-            'connectedExpenses'=>$connectedExpenses,
-            'allExpensesDp'=>$allExpensesDp,
-        ));
+        $this->handleRequest($model);
 	}
 
 	/**
@@ -154,75 +85,9 @@ class JobExpenseController extends Controller
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
 
-//            echo '<pre>';
-//            var_dump($_POST);
-//            exit();
         $model = JobExpense::model()->findByPk($id);
 
-		if(isset($_POST['JobExpense']))
-		{
-			$model->attributes = $_POST['JobExpense'];
-            $model->type = 'job';
-
-			if($model->save()) {
-                if (isset($_POST['idsToBind']))
-                    Expense::model()->updateByPk($_POST['idsToBind'],
-                        array('bound_id'=>$model->id));
-                
-                if (isset($_POST['idsToUnbind']))
-                    Expense::model()->updateByPk($_POST['idsToUnbind'],
-                        array('bound_id'=>null));
-
-                if (isset($_POST['bind']) || isset($_POST['unbind']))
-                    $this->redirect(array('update','id'=>$model->id));
-                else
-                    $this->redirect(array('view','id'=>$model->id));
-            }
-        }
-
-        $contractorsDp = new CActiveDataProvider('Contractor', array(
-            'criteria'=>array(
-                'scopes'=>array('type'=>array(Contractor::TYPE_GARAGE))
-            ),
-        ));
-        $contractors = Contractor::model()->type(Contractor::TYPE_GARAGE)->findAll();
-
-        $parts = Part::model()->findAll(); 
-
-        $jobs = Job::model()->findAll(); 
-        $jobsDp = new CActiveDataProvider('Job'); 
-
-        $allExpensesDp = new CActiveDataProvider('PartExpense', array(
-            'criteria' => array(
-                'condition' => 'bound_id is NULL',
-            )
-        ));
-        $expenses = Expense::model()->findAll('part_id IS NOT NULL OR job_id IS NOT NULL');
-
-        $connectedExpenses = Expense::model()->findAll('bound_id=:id', array(
-            ':id'=>$model->id,
-        ));  
-        $connectedExpensesDp = new CActiveDataProvider('PartExpense', array(
-            'criteria' => array(
-                'condition' => 'bound_id=:id',
-                'params' => array(':id' => $model->id),
-            )
-        ));
-
-
-        $this->render('update',array(
-            'expenseType'=>'job',
-            'model'=>$model,
-            'parts'=>$parts,
-            'jobs'=>$jobs,
-            'contractors'=>$contractors,
-            'jobsDp'=>$jobsDp,
-            'expenses'=>$expenses,
-            'contractorsDp'=>$contractorsDp,
-            'connectedExpensesDp'=>$connectedExpensesDp,
-            'connectedExpenses'=>$connectedExpenses,
-            'allExpensesDp'=>$allExpensesDp,
-        ));
+        $this->handleRequest($model);
 	}
 
 	/**
@@ -298,4 +163,52 @@ class JobExpenseController extends Controller
 			Yii::app()->end();
 		}
 	}
+
+
+	/**
+	 * My methods are below
+	 */
+
+    protected function handleRequest($model)
+    {
+		if (isset($_POST['JobExpense'])) {
+
+			$model->attributes = $_POST['JobExpense'];
+            $model->expense_type_id = Expense::TYPE_JOB;
+
+            if ($model->save()) {
+
+                if (isset($_POST['idsToBind']))
+                    Expense::model()->updateByPk($_POST['idsToBind'],
+                        array('bound_id' => $model->id));
+                
+                if (isset($_POST['idsToUnbind']))
+                    Expense::model()->updateByPk($_POST['idsToUnbind'],
+                        array('bound_id '=> 'NULL'));
+
+                $this->redirect(array('view', 'id' => $model->id));
+            }
+        }
+
+        $partsAll = Part::model()->findAll(); 
+        $jobsAll = Job::model()->findAll(); 
+        $garagesAll = Contractor::model()->type(Contractor::TYPE_GARAGE)
+                                          ->findAll();
+        $boundToModelExpenses = Expense::model()->findAll('bound_id=:id', array(
+            ':id'=> $model->id,
+        ));
+
+        $boundToNothingExpenses = PartExpense::model()->findAll(
+            'bound_id is NULL');
+
+
+        $this->render('edit', array(
+            'model' => $model,
+            'partsAll' => $partsAll,
+            'jobsAll' => $jobsAll,
+            'garagesAll' => $garagesAll,
+            'boundToModelExpenses' => $boundToModelExpenses,
+            'boundToNothingExpenses' => $boundToNothingExpenses,
+        ));
+    }
 }
