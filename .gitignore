@@ -1,12 +1,4 @@
-assets/*
-!assets/.gitignore
-protected/runtime/*
-!protected/runtime/.gitignore
+assets/
+protected/runtime/
 protected/data/*.db
-protected/vendor/bootstrap/*
-node_modules/*
-protected/components/PaavForm.php
-protected/views/jobExpense/jobExpenseForm.php
-protected/views/jobExpense/create.php
-protected/views/partExpense/create.php
 

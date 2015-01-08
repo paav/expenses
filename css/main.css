@@ -1,6 +1,60 @@
 .nav-main {
   margin: 0 0 20px 0;
 }
+.nav-links li a {
+  background: center center no-repeat;
+  background-size: 70% auto;
+  height: 112px;
+  position: relative;
+  transition: background-image 1s ease-in-out;
+  width: 100px;
+}
+.nav-links li a > .nav-links-label {
+  text-shadow: -1px -1px 0 #421c52, 1px -1px 0 #421c52, -1px 1px 0 #421c52, 1px 1px 0 #421c52, -1px 0px 0 #421c52, 1px 0px 0 #421c52;
+  color: #fff;
+  font-weight: bold;
+  height: 50px;
+  margin-top: -25px;
+  position: absolute;
+  top: 50%;
+  opacity: 0;
+  text-align: center;
+  transition: opacity 1s ease-in-out;
+  width: 70%;
+}
+.nav-links li a:hover > .nav-links-label {
+  opacity: 1;
+}
+.nav-links li:nth-child(1):nth-last-child(3) a {
+  background-image: url('../images/step-back-link.png');
+}
+.nav-links li:nth-child(1):nth-last-child(3) a:hover {
+  background-image: url('../images/step-back-link-hovered.png');
+}
+.nav-links li:not(.active):nth-last-child(2) a {
+  background-image: url('../images/add-repair-expense.png');
+}
+.nav-links li:not(.active):nth-last-child(2) a:hover {
+  background-image: url('../images/add-repair-expense-hovered.png');
+}
+.nav-links li.active:nth-last-child(2) a {
+  background-image: url('../images/add-repair-expense-hovered.png');
+}
+.nav-links li.active:nth-last-child(2) a > .nav-links-label {
+  opacity: 1;
+}
+.nav-links li:not(.active):nth-last-child(1) a {
+  background-image: url('../images/add-parts-expense.png');
+}
+.nav-links li:not(.active):nth-last-child(1) a:hover {
+  background-image: url('../images/add-parts-expense-hovered.png');
+}
+.nav-links li.active:nth-last-child(1) a {
+  background-image: url('../images/add-parts-expense-hovered.png');
+}
+.nav-links li.active:nth-last-child(1) a > .nav-links-label {
+  opacity: 1;
+}
 .hover-scale {
   transition: all 0.2s ease-in-out;
 }

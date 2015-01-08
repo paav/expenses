@@ -7,7 +7,8 @@
 // CWebApplication properties can be configured here.
 return array(
 	'basePath'=>dirname(__FILE__).DIRECTORY_SEPARATOR.'..',
-	'name'=>'theCarExpenses',
+	'name'=>'Expenses',
+    'defaultController' => 'expense',
 
 	// preloading 'log' component
 	'preload'=>array('log'),
@@ -38,7 +39,6 @@ return array(
 		'urlManager'=>array(
 			'urlFormat'=>'path',
 			'rules'=>array(
-                '' => 'expense/index',
 				'<controller:\w+>/<id:\d+>'=>'<controller>/view',
 				'<controller:\w+>/<action:\w+>/<id:\d+>'=>'<controller>/<action>',
 				'<controller:\w+>/<action:\w+>/<expenseType:\w+>/<id:\d+>'=>'<controller>/<action>',

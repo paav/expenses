@@ -1,4 +1,25 @@
 // vim: ts=2:sw=2:sts=2
+//
+// Colors
+// --------------------------------------------------
+
+@primary-color: #421c52;  // purple
+
+
+//
+// Mixings
+// --------------------------------------------------
+
+.stroke(@color: #000) {
+  text-shadow:
+    -1px -1px 0 @color,  
+     1px -1px 0 @color,
+    -1px  1px 0 @color,
+     1px  1px 0 @color,
+    -1px  0px 0 @color,
+     1px  0px 0 @color;
+}
+
 
 //
 // Navigation
@@ -6,6 +27,76 @@
 
 .nav-main {
   margin: 0 0 20px 0;
+}
+
+.nav-links {
+  li {
+    a {
+      @link-width: 100px;
+      @background-width: 70%;
+      background: center center no-repeat;
+      background-size: @background-width auto;
+      height: 112px;
+      position: relative; // To center child elem vertically
+      transition: background-image 1s ease-in-out;
+      width: @link-width;
+
+      > .nav-links-label {
+        @label-height: 50px;
+        .stroke(@color: @primary-color);
+        color: #fff;
+        font-weight: bold;
+
+        // TODO: text in this is not aligned vertically.
+        // Center elem vertically relative to its parent
+        height: @label-height;          
+        margin-top: -@label-height / 2; 
+        position: absolute;
+        top: 50%;
+
+        opacity: 0;  
+        text-align: center;
+        transition: opacity 1s ease-in-out;
+        width: @background-width;
+      }
+      &:hover {
+        > .nav-links-label {
+          opacity: 1;
+        }
+      }
+    }
+    &:nth-child(1):nth-last-child(3) a {
+      background-image: url('../images/step-back-link.png');
+      &:hover {
+        background-image: url('../images/step-back-link-hovered.png');
+      }
+    }
+    &:not(.active):nth-last-child(2) a {
+      background-image: url('../images/add-repair-expense.png');
+      &:hover {
+        background-image: url('../images/add-repair-expense-hovered.png');
+      }
+    }
+    // TODO: try to make without repetition
+    &.active:nth-last-child(2) a {
+      background-image: url('../images/add-repair-expense-hovered.png');
+      > .nav-links-label {
+        opacity: 1;
+      }
+    }
+    &:not(.active):nth-last-child(1) a {
+      background-image: url('../images/add-parts-expense.png');
+      &:hover {
+        background-image: url('../images/add-parts-expense-hovered.png');
+      }
+    }
+    &.active:nth-last-child(1) a {
+      background-image: url('../images/add-parts-expense-hovered.png');
+      > .nav-links-label {
+        opacity: 1;
+      }
+    }
+  }
 }
 
 
