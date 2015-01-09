@@ -93,6 +93,8 @@ class Expense extends CActiveRecord
 		return array(
 			'contractor' => array(self::BELONGS_TO, 'Contractor', 'contractor_id'),
             'expenseType' => array(self::BELONGS_TO, 'ExpenseType', 'expense_type_id'),
+			'part' => array(self::BELONGS_TO, 'Part', 'part_id'),
+			'job' => array(self::BELONGS_TO, 'Job', 'job_id'),
 		);
 	}
 

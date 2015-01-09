@@ -238,7 +238,67 @@ class ExpenseController extends Controller
 	 */
 	public function actionIndex()
 	{
-        $criteria = new CDbCriteria(array('order' => 'date ASC'));
+        $searchForm = new SearchForm;
+
+        $criteria = new CDbCriteria(array(
+            'order' => 'date ASC',
+        ));
+
+        if (isset($_GET['SearchForm'])) {
+            $searchForm->attributes = $_GET['SearchForm'];
+
+            if ($searchForm->validate()) {
+                $searchString = $searchForm->searchString;
+
+                // TODO: move from here.
+                $viewDatePatterns = [
+                    'dd.MM.yyyy',
+                    'dd.MM.yy',
+                    'MM.yyyy',
+                    'MM.yy',
+                    'yy',
+                    'yyyy',
+                    'dd.MM',
+                    'd.M.yy',
+                ];
+
+                // Get DB date formats, e.g. yyyy-MM-dd
+                foreach ($viewDatePatterns as $datePattern)
+                    $dbDatePatterns[] = str_replace('.', '-', strrev(
+                        $datePattern));
+
+                foreach ($viewDatePatterns as $index => $datePattern) {
+                    $timestamp = CDateTimeParser::parse(trim($searchString),
+                                                        $datePattern);
+                    if ($timestamp) {
+                        $searchString = yii::app()->dateFormatter->format(
+                            $dbDatePatterns[$index], $timestamp);
+                        l($searchString);
+
+                        break;
+                    }
+                }
+
+
+                $criteria->mergeWith(array(
+                    'with' => array(
+                        'expenseType',
+                        'part',
+                        'part.type' => array(
+                            'alias' => 'partType',
+                        ),
+                        'job',
+                    ),
+                ));
+
+                $criteria->compare('date', $searchString, true, 'OR'); 
+                $criteria->compare('expenseType.name', $searchString, true, 'OR'); 
+                $criteria->compare('part.name', $searchString, true, 'OR'); 
+                $criteria->compare('partType.name', $searchString, true, 'OR'); 
+                $criteria->compare('job.name', $searchString, true, 'OR'); 
+            }
+        }
+
         $count = Expense::model()->count($criteria);
 
         $pages = new CPagination($count);
@@ -259,7 +319,8 @@ class ExpenseController extends Controller
 		$this->render('index',array(
             'allExpenses' => $allExpenses,
 			'allExpensesDp'=> $allExpensesDp,
-            'pages' => $pages
+            'pages' => $pages,
+            'searchForm' => $searchForm,
 		));
 	}
 

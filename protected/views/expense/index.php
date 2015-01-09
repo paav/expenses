@@ -6,6 +6,19 @@
  */
 ?>
 <h1>Все расходы</h1> 
+<form method="get">
+  <div class="form-group">
+    <?php //echo $form->labelEx($searchForm, 'searchString'); ?>
+    <?php //echo $form->error($searchForm, 'searchString'); ?>
+    <?php //echo $form->textField($searchForm, 'searchString', array(
+            //'class'=>'form-control')); ?>
+    <?php echo CHtml::activeLabelEx($searchForm, 'searchString'); ?>
+    <?php echo CHtml::error($searchForm, 'searchString'); ?>
+    <?php echo CHtml::activeSearchField($searchForm, 'searchString', array(
+            'class'=>'form-control')); ?>
+  </div>
+  <input type="submit" class="btn btn-default" value="Найти">
+</form>
 <table class="table table-bordered table-hover">
   <thead>
     <tr>
