@@ -2246,6 +2246,11 @@ th {
   background-color: #421c52;
   color: #ffffff;
 }
+.table > thead > tr > th > a {
+  color: #ffffff;
+  display: block;
+  text-decoration: none;
+}
 .table > caption + thead > tr:first-child > th,
 .table > colgroup + thead > tr:first-child > th,
 .table > thead:first-child > tr:first-child > th,

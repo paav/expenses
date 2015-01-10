@@ -44,6 +44,12 @@ th {
     border-bottom: 2px solid @table-border-color;
     background-color: @table-caption-bg-color;
     color: @table-caption-color;
+
+    > a {
+      color: @table-caption-color;
+      display: block;
+      text-decoration: none;
+    }
   }
   // Remove top border from thead by default
   > caption + thead,

@@ -239,9 +239,33 @@ class ExpenseController extends Controller
 	public function actionIndex()
 	{
         $searchForm = new SearchForm;
+        $sortHelper = new PaavSortHelper(array(
+            // Valid attrs for sorting.
+            // First element is set as sort by element.
+            // Attr => SQL ORDER BY clause substring.
+            'run' => 'run',
+            'date' => 'date',
+            'type' => 'expenseType.name',
+            'cost' => 'cost',
+        ));
+
+        $SqlOrder = $sortHelper->getSqlOrder($_GET);
+        l($SqlOrder);
 
         $criteria = new CDbCriteria(array(
-            'order' => 'date ASC',
+            'select' => array(
+                '*',
+                'IFNULL(cost, unit_price * quantity) AS cost',
+            ),
+            'with' => array(
+                'expenseType',
+                'part',
+                'part.type' => array(
+                    'alias' => 'partType',
+                ),
+                'job',
+            ),
+            'order' => $SqlOrder,
         ));
 
         if (isset($_GET['SearchForm'])) {
@@ -279,18 +303,6 @@ class ExpenseController extends Controller
                     }
                 }
 
-
-                $criteria->mergeWith(array(
-                    'with' => array(
-                        'expenseType',
-                        'part',
-                        'part.type' => array(
-                            'alias' => 'partType',
-                        ),
-                        'job',
-                    ),
-                ));
-
                 $criteria->compare('date', $searchString, true, 'OR'); 
                 $criteria->compare('expenseType.name', $searchString, true, 'OR'); 
                 $criteria->compare('part.name', $searchString, true, 'OR'); 
@@ -321,6 +333,7 @@ class ExpenseController extends Controller
 			'allExpensesDp'=> $allExpensesDp,
             'pages' => $pages,
             'searchForm' => $searchForm,
+            'sortHelper' => $sortHelper,
 		));
 	}
 

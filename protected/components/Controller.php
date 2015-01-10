@@ -40,4 +40,9 @@ class Controller extends CController
             $currentController->action->id == $routeActionId)
             return true;
     } 
+
+    public function updateUrl($route, $params)
+    {
+        return $this->createUrl($route, array_merge($_GET, $params));
+    }
 }

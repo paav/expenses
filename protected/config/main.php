@@ -8,6 +8,7 @@
 return array(
 	'basePath'=>dirname(__FILE__).DIRECTORY_SEPARATOR.'..',
 	'name'=>'Expenses',
+    'language'=>'ru',
     'defaultController' => 'expense',
 
 	// preloading 'log' component
