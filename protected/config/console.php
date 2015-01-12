@@ -15,15 +15,14 @@ return array(
 			'connectionString' => 'sqlite:'.dirname(__FILE__).'/../data/testdrive.db',
 		),
 		// uncomment the following to use a MySQL database
-		/*
 		'db'=>array(
-			'connectionString' => 'mysql:host=localhost;dbname=testdrive',
+			'connectionString' => 'mysql:host=localhost;dbname=expenses',
 			'emulatePrepare' => true,
-			'username' => 'root',
-			'password' => '',
+            'enableParamLogging' => true,
+			'username' => 'yii',
+			'password' => '12345',
 			'charset' => 'utf8',
 		),
-		*/
 		'log'=>array(
 			'class'=>'CLogRouter',
 			'routes'=>array(

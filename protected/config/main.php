@@ -34,7 +34,7 @@ return array(
 	'components'=>array(
 		'user'=>array(
 			// enable cookie-based authentication
-			'allowAutoLogin'=>true,
+			'allowAutoLogin'=>false,
 		),
 		// uncomment the following to enable URLs in path-format
 		'urlManager'=>array(
@@ -54,7 +54,7 @@ return array(
 			'connectionString' => 'mysql:host=localhost;dbname=expenses',
 			'emulatePrepare' => true,
             'enableParamLogging' => true,
-			'username' => 'alex',
+			'username' => 'yii',
 			'password' => '12345',
 			'charset' => 'utf8',
 		),
@@ -77,6 +77,9 @@ return array(
 				),
 			),
 		),
+        'helper' => array(
+            'class' => 'ext.PaavHelper',
+        ),
         'format'=>array(
             'class'=>'application.extensions.MyFormatter',
             'dateFormat'=>'d.m.Y',
@@ -86,7 +89,6 @@ return array(
                 'thousandSeparator'=>' ',
             ),
         ),
-
         'widgetFactory'=>array(
             'widgets'=>array(
                 'CGridView'=>array(
@@ -111,5 +113,6 @@ return array(
 	'params'=>array(
 		// this is used in contact page
 		'adminEmail'=>'webmaster@example.com',
+        'encryptionKey' => 'dkflbdjcnjr2000',
 	),
 );

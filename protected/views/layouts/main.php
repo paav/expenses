@@ -1,12 +1,9 @@
 <?php
 // vim: ts=2:sw=2:sts=2:ft=htmlphp
-// @var $this Controller
-
-// TODO: move to php file.
+/**
+ * @var $this Controller
+ */
 $baseUrl = Yii::app()->request->baseUrl;
-$createJobExpenseRoute = 'jobExpense/create';
-$createPartExpenseRoute = 'partExpense/create'; 
-$activeClass = 'class="active"';
 ?>
 <!DOCTYPE html>
 <meta charset="utf-8">
@@ -21,29 +18,7 @@ $activeClass = 'class="active"';
 <link href="//fonts.googleapis.com/css?family=Alegreya+Sans+SC:400,900|Alegreya+Sans:400,900|Bowlby+One+SC"
       rel="stylesheet">
 <title><?php echo $this->pageTitle; ?></title>
-<div class="container">
-  <nav class="nav-main">
-    <ul class="nav nav-links">
-      <?php if (!$this->isHome()): ?>
-      <li>
-        <a href="<?php echo $this->createAbsoluteUrl('expense/index'); ?>">
-          <div class="nav-links-label">На главную</div>
-        </a>
-      <?php endif; ?>
-      <li <?php if ($this->isRoute($createJobExpenseRoute)) echo $activeClass; ?>>
-        <a href="<?php echo $this->createAbsoluteUrl($createJobExpenseRoute); ?>">
-          <div class="nav-links-label">Добавить расход на работу</div>
-        </a>
-      <li <?php if ($this->isRoute($createPartExpenseRoute)) echo $activeClass; ?>>
-        <a href="<?php echo $this->createAbsoluteUrl($createPartExpenseRoute); ?>">
-          <div class="nav-links-label">Добавить расход на запчасть</div></a>
-        </a>
-    </ul>
-  </nav>
-</div>
-<main class="container">
   <?php echo $content; ?>
-</main>
 <footer>
   Footer goes here
 </footer>

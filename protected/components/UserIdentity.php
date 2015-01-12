@@ -7,6 +7,8 @@
  */
 class UserIdentity extends CUserIdentity
 {
+    private $_id;
+
 	/**
 	 * Authenticates a user.
 	 * The example implementation makes sure if the username and password
@@ -22,12 +24,29 @@ class UserIdentity extends CUserIdentity
 			'demo'=>'demo',
 			'admin'=>'admin',
 		);
-		if(!isset($users[$this->username]))
+
+        $user = User::model()->findByAttributes(array(
+            'username' => $this->username
+        ));
+
+        $hashToVerify = Yii::app()->helper->getHash($this->password);
+
+		if ($user === null)
 			$this->errorCode=self::ERROR_USERNAME_INVALID;
-		elseif($users[$this->username]!==$this->password)
+
+        elseif ($user->password !== $hashToVerify)
 			$this->errorCode=self::ERROR_PASSWORD_INVALID;
-		else
+
+		else {
 			$this->errorCode=self::ERROR_NONE;
+            $this->_id = $user->id;
+        }
+
 		return !$this->errorCode;
 	}
+
+    public function getId()
+    {
+        return $this->_id;
+    }
 }

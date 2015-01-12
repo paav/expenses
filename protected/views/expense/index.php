@@ -4,6 +4,8 @@
  * @var $this ExpenseController
  * @var $allExpenses array of Expense objects
  */
+$this->pageTitle = 'Все расходы | Expenses';
+
 $labels = ['date' => 'Дата',
            'run'  => 'Пробег',
            'type' => 'Тип расхода',
@@ -11,7 +13,6 @@ $labels = ['date' => 'Дата',
            'descr'=> 'Описание'];
 $numberFormatter = yii::app()->numberFormatter;
 ?>
-
 <h1>Все расходы</h1> 
 <form method="get">
   <div class="form-group">
@@ -56,18 +57,18 @@ $numberFormatter = yii::app()->numberFormatter;
       <td><?php echo $expense->descr; ?>
           <?php $ctrl = $expense->type == Expense::TYPE_JOB ? 'JobExpense'
                                                             : 'PartExpense'; ?>
-      <td class="cell-action"><a href="<?php
-                                  echo $this->createAbsoluteUrl($ctrl . '/view',
-                                    array('id'=>$expense->id));
-                          ?>"><i class="fa fa-search fa-lg hover-scale"></i></a>
-      <td class="cell-action"><a href="<?php
-                                echo $this->createAbsoluteUrl($ctrl . '/update',
-                                  array('id'=>$expense->id));
-                            ?>"><i class="fa fa-edit fa-lg hover-scale"></i></a>
-      <td class="cell-action"><a href="<?php
-                                 echo $this->createAbsoluteUrl('Expense/delete',
-                                   array('id'=>$expense->id));
-                          ?>"><i class="fa fa-remove fa-lg hover-scale"></i></a>
+      <td class="cell-action"><a href="<?php echo $this->createAbsoluteUrl(
+                                               $ctrl . '/view',
+                                               array('id'=>$expense->id));
+        ?>"><i class="fa fa-search fa-lg hover-scale"></i></a>
+      <td class="cell-action"><a href="<?php echo $this->createAbsoluteUrl(
+                                               $ctrl . '/update',
+                                               array('id'=>$expense->id));
+        ?>"><i class="fa fa-edit fa-lg hover-scale"></i></a>
+      <td class="cell-action"><a href="<?php echo $this->createAbsoluteUrl(
+                                               'Expense/delete',
+                                               array('id'=>$expense->id));
+        ?>"><i class="fa fa-remove fa-lg hover-scale"></i></a>
     <?php endforeach; ?>
 </table>
 <?php $this->widget('CLinkPager', array('pages'=>$pages)); ?>
