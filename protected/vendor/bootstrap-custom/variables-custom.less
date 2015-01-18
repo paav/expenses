@@ -31,9 +31,9 @@
 @text-color:            @gray-dark;
 
 //** Global textual link color.
-@link-color:            @brand-primary;
+@link-color:            #b02a27;
 //** Link hover color set via `darken()` function.
-@link-hover-color:      darken(@link-color, 15%);
+@link-hover-color:      #b02a27;
 //** Link hover decoration.
 @link-hover-decoration: underline;
 
@@ -65,7 +65,7 @@
 @line-height-computed:    floor((@font-size-base * @line-height-base)); // ~20px
 
 //** By default, this inherits from the `<body>`.
-@headings-font-family:    inherit;
+@headings-font-family:    Ubuntu, Arial, sans-serif;
 @headings-font-weight:    500;
 @headings-line-height:    1.1;
 @headings-color:          inherit;
@@ -121,6 +121,10 @@
 //
 //## Customizes the `.table` component with basic values, each used across all table variations.
 
+//** Font
+@table-font-color:              lighten(@text-color, 5%);
+@table-font-weight:             bold;
+
 //** Padding for `<th>`s and `<td>`s.
 @table-cell-padding:            8px;
 //** Padding for cells in `.table-condensed`.
@@ -131,27 +135,38 @@
 //** Background color used for `.table-striped`.
 @table-bg-accent:               #f9f9f9;
 //** Background color used for `.table-hover`.
-@table-bg-hover:                #bdaec6;
+@table-bg-hover:                #85c226;
 @table-bg-active:               @table-bg-hover;
 
 //** Border color for table and cell borders.
-@table-border-color:            #ddd;
+@table-border-color:            #1f1a17;
 
-//** My
+//** Caption colors.
 @table-caption-color:           #fff;
-@table-caption-bg-color:        #421c52;
-@table-action-color:            #732c7b;
-@table-action-color-hover:      #732c7b;
+@table-caption-bg:              lighten(#b02a27, 10%);
+
+//** Commads column text color.
+@table-col-cmd-color:           #b02a27;
+
+//** E.g. columns widths, only in %. 
+@table-width-1:                 11%;
+@table-width-2:                 3.5%;
+
+//** Active column background color.
+@table-col-active-bg:           #c8dbe2;
 
 //== Buttons
 //
 //## For each of Bootstrap's buttons, define text, background and border color.
 
-@btn-font-weight:                normal;
+@btn-font-weight:                bold;
 
-@btn-default-color:              #333;
-@btn-default-bg:                 #fff;
-@btn-default-border:             #ccc;
+@btn-border-width:               2px;
+
+@btn-default-color:              #000;
+@btn-default-bg:                 #f3cd38;
+@btn-default-bg-hover:           #e8af00;      
+@btn-default-border:             #1f1a17;
 
 @btn-primary-color:              #fff;
 @btn-primary-bg:                 @brand-primary;
@@ -181,26 +196,26 @@
 //##
 
 //** `<input>` background color
-@input-bg:                       #fff;
+@input-bg:                       #c8dbe2;
 //** `<input disabled>` background color
 @input-bg-disabled:              @gray-lighter;
 
 //** Text color for `<input>`s
-@input-color:                    @gray;
+@input-color:                    #000;
 //** `<input>` border color
-@input-border:                   #ccc;
+@input-border:                   #1f1a17;
 
 // TODO: Rename `@input-border-radius` to `@input-border-radius-base` in v4
 //** Default `.form-control` border radius
 // This has no effect on `<select>`s in some browsers, due to the limited stylability of `<select>`s in CSS.
-@input-border-radius:            @border-radius-base;
+@input-border-radius:            10px;
 //** Large `.form-control` border radius
 @input-border-radius-large:      @border-radius-large;
 //** Small `.form-control` border radius
 @input-border-radius-small:      @border-radius-small;
 
 //** Border color for inputs on focus
-@input-border-focus:             #66afe9;
+@input-border-focus:             #b02a27;
 
 //** Placeholder text color
 @input-color-placeholder:        #999;
@@ -503,7 +518,7 @@
 @state-warning-bg:               #fcf8e3;
 @state-warning-border:           darken(spin(@state-warning-bg, -10), 5%);
 
-@state-danger-text:              #a94442;
+@state-danger-text:              red;
 @state-danger-bg:                #f2dede;
 @state-danger-border:            darken(spin(@state-danger-bg, -10), 5%);
 

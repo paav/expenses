@@ -1,63 +1,161 @@
-.nav-main {
-  margin: 0 0 20px 0;
+html,
+body {
+  padding: 0;
+  height: 100%;
 }
-.nav-links li a {
-  background: center center no-repeat;
-  background-size: 70% auto;
-  height: 112px;
+.l-rootContainer {
+  min-height: 100%;
   position: relative;
-  transition: background-image 1s ease-in-out;
-  width: 100px;
 }
-.nav-links li a > .nav-links-label {
-  text-shadow: -1px -1px 0 #421c52, 1px -1px 0 #421c52, -1px 1px 0 #421c52, 1px 1px 0 #421c52, -1px 0px 0 #421c52, 1px 0px 0 #421c52;
-  color: #fff;
-  font-weight: bold;
-  height: 50px;
-  margin-top: -25px;
+.l-rootContainer > main {
+  padding-bottom: 33px;
+}
+.l-rootContainer > footer {
   position: absolute;
-  top: 50%;
+  bottom: 0;
+  height: 33px;
+  width: 100%;
+}
+.loginForm {
+  position: relative;
+  width: 600px;
+  height: 300px;
+  /*padding: 20px;*/
+  margin: 80px auto 0 30%;
+  /*border: 4px solid #b02a27;*/
+  /*border-radius: 50px;*/
+}
+.loginForm > .loginForm-img {
+  float: left;
+  width: 230px;
+  height: 300px;
+  background: center center no-repeat;
+  background-image: url('../images/dev/login-image.jpg');
+  background-size: contain;
+}
+.loginForm > form {
+  top: 50px;
+  left: 250px;
+  position: absolute;
+  width: 450px;
+}
+.expenses-page .search-form {
+  margin: 0 0 15px 0;
+}
+.nav-main {
+  /*margin: 0 0 20px 0;*/
+}
+.rollover {
+  position: relative;
+  width: 100px;
+  height: 112px;
+}
+.rollover:hover > .rollover-label {
+  opacity: 1;
+}
+.rollover:hover > img:first-child {
   opacity: 0;
-  text-align: center;
+}
+.rollover:hover > img:first-child + img {
+  opacity: 1;
+}
+.rollover > .rollover-img {
+  height: 100%;
+  background: center center no-repeat;
+  background-size: auto 70%;
+  transition: background-image 1s ease-in-out;
+}
+.rollover > img:first-child,
+.rollover > img:nth-child(2) {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  height: 70;
+  margin: auto;
   transition: opacity 1s ease-in-out;
-  width: 70%;
 }
-.nav-links li a:hover > .nav-links-label {
-  opacity: 1;
+.rollover > img:nth-child(2) {
+  opacity: 0;
 }
-.nav-links li:nth-child(1):nth-last-child(3) a {
-  background-image: url('../images/step-back-link.png');
+.rollover > .rollover-label {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  height: 50%;
+  margin: auto;
+  text-shadow: -1px -1px 0 #b02a27, 1px -1px 0 #b02a27, -1px 1px 0 #b02a27, 1px 1px 0 #b02a27, -1px 0px 0 #b02a27, 1px 0px 0 #b02a27;
+  color: #ffffff;
+  font-weight: bold;
+  text-align: center;
+  opacity: 0;
+  transition: opacity 1s ease-in-out;
 }
-.nav-links li:nth-child(1):nth-last-child(3) a:hover {
-  background-image: url('../images/step-back-link-hovered.png');
+.rolloverContainer-1 > li:nth-last-child(3) .rollover:hover > .rollover-img {
+  background-image: url('../images/home_hover.png');
 }
-.nav-links li:not(.active):nth-last-child(2) a {
-  background-image: url('../images/add-repair-expense.png');
+.rolloverContainer-1 > li:nth-last-child(3) .rollover > .rollover-img {
+  background-image: url('../images/home.png');
 }
-.nav-links li:not(.active):nth-last-child(2) a:hover {
-  background-image: url('../images/add-repair-expense-hovered.png');
+.rolloverContainer-1 > li:nth-last-child(3) .rollover > .rollover-label {
+  height: 1em;
 }
-.nav-links li.active:nth-last-child(2) a {
-  background-image: url('../images/add-repair-expense-hovered.png');
+.rolloverContainer-1 > li:nth-last-child(2) .rollover:hover > .rollover-img {
+  background-image: url('../images/add-job-expense-hover.png');
 }
-.nav-links li.active:nth-last-child(2) a > .nav-links-label {
-  opacity: 1;
+.rolloverContainer-1 > li:nth-last-child(2) .rollover > .rollover-img {
+  background-image: url('../images/add-job-expense.png');
 }
-.nav-links li:not(.active):nth-last-child(1) a {
-  background-image: url('../images/add-parts-expense.png');
+.rolloverContainer-1 > li:nth-last-child(1) .rollover:hover > .rollover-img {
+  background-image: url('../images/add-part-expense-hover.png');
 }
-.nav-links li:not(.active):nth-last-child(1) a:hover {
-  background-image: url('../images/add-parts-expense-hovered.png');
+.rolloverContainer-1 > li:nth-last-child(1) .rollover > .rollover-img {
+  background-image: url('../images/add-part-expense.png');
 }
-.nav-links li.active:nth-last-child(1) a {
-  background-image: url('../images/add-parts-expense-hovered.png');
+.rolloverContainer-2 > li .rollover {
+  width: 140px;
 }
-.nav-links li.active:nth-last-child(1) a > .nav-links-label {
-  opacity: 1;
+.rolloverContainer-2 > li .rollover > img {
+  width: 70px;
+  height: 70px;
+}
+.rolloverContainer-2 > li .rollover > .rollover-label {
+  height: 1em;
+}
+.rolloverContainer-3 > li .rollover > .rollover-img {
+  background-size: 100% auto;
+}
+.rolloverContainer-3 > li .rollover > .rollover-label {
+  height: 1em;
+}
+.rolloverContainer-3 > li:nth-last-child(1) .rollover:hover > .rollover-img {
+  background-image: url('../images/exit_hover.png');
+}
+.rolloverContainer-3 > li:nth-last-child(1) .rollover > .rollover-img {
+  background-image: url('../images/exit.png');
 }
 .hover-scale {
   transition: all 0.2s ease-in-out;
 }
 .hover-scale:hover {
   transform: scale(1.5);
+}
+footer {
+  color: #fff;
+  background-color: #b02a27;
+  border-top: 3px solid #1f1a17;
+}
+footer p {
+  margin: 0;
+  padding: 5px 0;
+}
+.error-msg {
+  padding: 6px 0 0 0;
+  margin: 0 0 0 -15px;
+}
+.paavpager-info {
+  margin-right: 15px;
 }

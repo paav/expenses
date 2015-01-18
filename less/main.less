@@ -1,9 +1,13 @@
 // vim: ts=2:sw=2:sts=2
+
 //
-// Colors
+// Variables
 // --------------------------------------------------
 
-@primary-color: #421c52;  // purple
+@primary-color: #b02a27;  // deep red
+@border-color:  #1f1a17;  // black
+
+@footer-height: 33px;
 
 
 //
@@ -20,85 +24,219 @@
      1px  0px 0 @color;
 }
 
+.center-vert(@height: 50%) {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  height: @height;          
+  margin: auto;
+}
+
+
+//
+// Layout
+// --------------------------------------------------
+
+//** Move footer to the page bottom.
+html,
+body {
+  padding: 0;
+  height: 100%;
+}
+
+.l-rootContainer {
+  min-height: 100%;
+  position: relative;
+
+  > main {
+    padding-bottom: @footer-height;
+  }
+
+  > footer {
+    position: absolute;
+    bottom: 0;
+    height: @footer-height;
+    width: 100%;
+  }
+}
+
+
+//
+// Pages
+// --------------------------------------------------
+
+//** Login form
+@loginForm-img:   '../images/dev/login-image.jpg';
+
+.loginForm {
+  @width: 600px;
+  @height: @width / 2;
+  @image-width: 230px;
+  position: relative;
+  width: @width;
+  height: @height;
+  /*padding: 20px;*/
+  margin: 80px auto 0 30%;
+  /*border: 4px solid #b02a27;*/
+  /*border-radius: 50px;*/
+
+  > .loginForm-img {
+    float: left;
+    width: @image-width;
+    height: @height;
+    background: center center no-repeat;
+    background-image: url(@loginForm-img);
+    background-size: contain;
+  }
+
+  > form {
+    top: 50px;
+    left: @image-width + 20;
+    position: absolute;
+    width: 450px;
+  }
+}
+
+.expenses-page {
+  .search-form {
+    margin: 0 0 15px 0;
+  }
+}
+
 
 //
 // Navigation
 // --------------------------------------------------
 
 .nav-main {
-  margin: 0 0 20px 0;
+  /*margin: 0 0 20px 0;*/
 }
 
-.nav-links {
-  li {
-    a {
-      @link-width: 100px;
-      @background-width: 70%;
-      background: center center no-repeat;
-      background-size: @background-width auto;
-      height: 112px;
-      position: relative; // To center child elem vertically
-      transition: background-image 1s ease-in-out;
-      width: @link-width;
+//** Rollover
+@rollover-color:        #fff;
+@rollover-font-weight:  bold;
 
-      > .nav-links-label {
-        @label-height: 50px;
-        .stroke(@color: @primary-color);
-        color: #fff;
-        font-weight: bold;
+.rollover {
+  position: relative;
+  width: 100px;
+  height: 112px;
 
-        // TODO: inner text is not aligned vertically.
-        // Center elem vertically relative to its parent
-        height: @label-height;          
-        margin-top: -@label-height / 2; 
-        position: absolute;
-        top: 50%;
+  &:hover {
+    > .rollover-label {
+      opacity: 1;
+    }
 
-        opacity: 0;  
-        text-align: center;
-        transition: opacity 1s ease-in-out;
-        width: @background-width;
-      }
-      &:hover {
-        > .nav-links-label {
-          opacity: 1;
-        }
-      }
-    }
-    &:nth-child(1):nth-last-child(3) a {
-      background-image: url('../images/step-back-link.png');
-      &:hover {
-        background-image: url('../images/step-back-link-hovered.png');
-      }
-    }
-    &:not(.active):nth-last-child(2) a {
-      background-image: url('../images/add-repair-expense.png');
-      &:hover {
-        background-image: url('../images/add-repair-expense-hovered.png');
-      }
-    }
-    // TODO: try to make without repetition
-    &.active:nth-last-child(2) a {
-      background-image: url('../images/add-repair-expense-hovered.png');
-      > .nav-links-label {
-        opacity: 1;
-      }
-    }
-    &:not(.active):nth-last-child(1) a {
-      background-image: url('../images/add-parts-expense.png');
-      &:hover {
-        background-image: url('../images/add-parts-expense-hovered.png');
-      }
-    }
-    &.active:nth-last-child(1) a {
-      background-image: url('../images/add-parts-expense-hovered.png');
-      > .nav-links-label {
+    // On load image
+    > img:first-child {
+      opacity: 0;
+
+      // On hover image
+      + img {
         opacity: 1;
       }
     }
   }
+
+  > .rollover-img {
+    height: 100%;
+    background: center center no-repeat;
+    background-size: auto 70%;
+    transition: background-image 1s ease-in-out;
+  }
+
+  > img:first-child,
+  > img:nth-child(2) {
+    .center-vert(70);
+    transition: opacity 1s ease-in-out;
+  }
+
+  > img:nth-child(2) {
+    opacity: 0;
+  }
+
+  > .rollover-label {
+    .center-vert();
+
+    .stroke(@color: @primary-color);
+
+    color: @rollover-color;
+    font-weight: @rollover-font-weight;
+    text-align: center;
+
+    opacity: 0;  
+    transition: opacity 1s ease-in-out;
+  }
 }
 
+.rolloverContainer-1 > li {
+  &:nth-last-child(3) .rollover {
+    &:hover > .rollover-img {
+      background-image: url('../images/home_hover.png');
+    }
+    > .rollover-img {
+      background-image: url('../images/home.png');
+    }
+    > .rollover-label {
+      height: 1em;
+    }
+  }
+
+  &:nth-last-child(2) .rollover {
+    &:hover > .rollover-img {
+      background-image: url('../images/add-job-expense-hover.png');
+    }
+    > .rollover-img {
+      background-image: url('../images/add-job-expense.png');
+    }
+  }
+
+  &:nth-last-child(1) .rollover {
+    &:hover > .rollover-img {
+      background-image: url('../images/add-part-expense-hover.png');
+    }
+    > .rollover-img {
+      background-image: url('../images/add-part-expense.png');
+    }
+  }
+}
+
+.rolloverContainer-2 > li {
+  .rollover {
+    width: 140px;
+
+    > img {
+      width: 70px;
+      height: 70px;
+    }
+
+    > .rollover-label {
+      height: 1em;
+    }
+  }
+}
+
+.rolloverContainer-3 > li {
+  .rollover {
+    > .rollover-img {
+      background-size: 100% auto;
+    }
+
+    > .rollover-label {
+      height: 1em;
+    }
+  }
+
+  &:nth-last-child(1) .rollover {
+    &:hover > .rollover-img {
+      background-image: url('../images/exit_hover.png');
+    }
+    > .rollover-img {
+      background-image: url('../images/exit.png');
+    }
+  }
+}
 
 //
 // Misc
@@ -110,3 +248,38 @@
     transform: scale(1.5);
   }
 }
+
+
+//
+// Footer
+// --------------------------------------------------
+
+footer {
+  color: #fff;
+  background-color: @primary-color;
+  border-top: 3px solid @border-color;
+  p {
+    margin: 0;
+    padding: 5px 0;
+  }
+}
+
+
+//
+// Forms
+// --------------------------------------------------
+
+.error-msg {
+  padding: 6px 0 0 0;
+  margin: 0 0 0 -15px;
+}
+
+
+//
+// Paavpager
+// --------------------------------------------------
+
+.paavpager-info {
+  margin-right: 15px;
+}
+

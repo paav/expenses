@@ -40,6 +40,7 @@ class UserIdentity extends CUserIdentity
 		else {
 			$this->errorCode=self::ERROR_NONE;
             $this->_id = $user->id;
+            $this->setState('gender', $user->gender_id);
         }
 
 		return !$this->errorCode;

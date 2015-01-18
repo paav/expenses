@@ -37,7 +37,7 @@ module.exports = function(grunt) {
 
       BootstrapOverridesLess: {
         files: [
-          'protected/vendor/bootstrap-custom/*less',
+          'protected/vendor/bootstrap-custom/**/*less',
         ],
         tasks: ['less:compileBootstrapOverrides'],
         options: {

@@ -1,3 +1,5 @@
+// vim: ts=2:sw=2:sts=2
+
 //
 // Navs
 // --------------------------------------------------
@@ -137,30 +139,31 @@
 }
 
 
-// Pills
+// Links
 // -------------------------
 .nav-links {
   > li {
     float: left;
 
-    // Links rendered as pills
     > a {
-      border-radius: @nav-pills-border-radius;
-    }
-    + li {
-      margin-left: 0px;
+      &:hover {
+        text-decoration: underline;
+      } 
     }
 
-    // Active state
-    &.active > a {
-      &,
-      &:hover,
-      &:focus {
-      }
+    + li {
+      margin-left: 0px;
     }
   }
 }
 
+// Rollover links
+// -------------------------
+.nav-links-rollover {
+  > li > a {
+    padding: 0;
+  }
+}
 
 // Stacked pills
 .nav-stacked {

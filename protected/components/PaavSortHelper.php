@@ -10,7 +10,7 @@ class PaavSortHelper
     private $_paramDelim = '.';
     private $_sortableAttrs = array();
     private $_defaultOrder = self::ORDER_ASC;
-    private $_sortBy = '';
+    private $_sortBy;
     private $_defaultSortBy = '';
 
     public $isAsc = true;
@@ -81,4 +81,29 @@ class PaavSortHelper
     {
         return $column . ' ' . $order;
     }
-}
+
+    public function getSortable(array $attrs)
+    {
+        if (!isset($attrs))
+            return $this->_sortableAttrs;
+
+        return array_intersect($attrs, array_flip($this->_sortableAttrs));
+    }
+
+    public function getSortBy()
+    {
+        return isset($this->_sortBy) ? $this->_sortBy : false;
+    }
+
+    public function setSortBy($attr)
+    {
+        if (!$this->isSortable($attr))
+            return;
+
+        $this->_sortBy = $attr;
+
+        return true;
+    }
+} 
+  
+  

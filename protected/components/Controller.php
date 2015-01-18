@@ -51,4 +51,11 @@ class Controller extends CController
         l($this->action->id);
         return $this->action->id === $action;
     }
+
+    protected function beforeAction($action)
+    {
+        CHtml::$errorMessageCss = 'error-msg';
+
+        return parent::beforeAction($action);
+    }
 }

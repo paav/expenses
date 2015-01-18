@@ -12,6 +12,9 @@
  */
 class Gender extends CActiveRecord
 {
+    const MALE = 1;
+    const FEMALE = 2;
+
 	/**
 	 * @return string the associated database table name
 	 */

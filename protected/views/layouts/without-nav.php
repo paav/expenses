@@ -4,7 +4,5 @@
 /* @var $this Controller */
 ?>
 <?php $this->beginContent('//layouts/main'); ?>
-<main class="container">
-  <?php echo $content; ?>
-</main>
+<?php echo $content; ?>
 <?php $this->endContent(); ?>

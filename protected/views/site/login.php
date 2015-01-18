@@ -15,33 +15,40 @@ $ifErrorAdd = function($attr, $output) use ($model) {
 $icon = '<span class="glyphicon glyphicon-remove form-control-feedback"'
       . 'aria-hidden="true"></span>';
 ?>
-<div class="row">
-  <div class="col-md-3 col-md-offset-9">
-    <a href="<?php echo $this->createUrl( 'user/create'); ?>">Регистрация</a>
+<div class="loginForm">
+  <div class="loginForm-img">
   </div>
-</div>
-<div class="row">
-  <div class="col-md-4 col-md-offset-4">
-    <form method="post">
-      <div class="form-group has-feedback <?php $ifErrorAdd('username',
-                                                            'has-error'); ?>">
+  <form class="form-horizontal" method="post">
+    <div class="form-group has-feedback <?php $ifErrorAdd('username',
+                                                          'has-error'); ?>">
+      <div class="col-sm-12">
         <?php echo CHtml::activeLabel($model, 'username',
                                       array('class'=>'control-label')); ?>
+      </div>
+      <div class="col-sm-7">
         <?php echo CHtml::activeTextField($model, 'username',
                                           array('class'=>'form-control')); ?>
         <?php echo $ifErrorAdd('username', $icon); ?>
+      </div>
+      <div class="col-sm-5">
         <?php echo CHtml::error($model, 'username'); ?>
       </div>
-      <div class="form-group has-feedback <?php $ifErrorAdd('password',
-                                                            'has-error'); ?>">
+    </div>
+    <div class="form-group has-feedback <?php $ifErrorAdd('password',
+                                                          'has-error'); ?>">
+      <div class="col-sm-12">
         <?php echo CHtml::activeLabel($model, 'password',
-                                      array('class'=>'control-label')); ?>
+                                    array('class'=>'control-label')); ?>
+      </div>
+      <div class="col-sm-7">
         <?php echo CHtml::activePasswordField($model, 'password', array(
                      'class'=>'form-control')); ?>
         <?php echo $ifErrorAdd('password', $icon); ?>
+      </div>
+      <div class="col-sm-5">
         <?php echo CHtml::error($model, 'password'); ?>
       </div>
-      <input class="btn btn-default" type="submit" value="Войти">
-    </form>
-  </div>
+    </div>
+    <input class="btn btn-default" type="submit" value="Войти">
+  </form>
 </div>

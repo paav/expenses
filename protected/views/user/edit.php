@@ -15,8 +15,17 @@ else:
   $this->pageTitle = 'Редактирование профиля | Expenses';
 endif;
 ?>
+<?php if ($this->id == 'site'): ?>
+<nav>
+  <div class="row">
+    <div class="col-md-3 col-md-offset-9">
+      <a href="<?php echo $this->createUrl('site/login'); ?>">Вход</a>
+    </div>
+  </div>
+</nav>
+<?php endif; ?>
 <div class="row">
-  <div class="col-md-4 col-md-offset-4">
+  <div class="col-md-5 col-md-offset-4">
     <h1><?php echo $header; ?></h1>
     <?php
         $this->renderPartial('_form', array(

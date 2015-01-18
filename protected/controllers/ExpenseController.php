@@ -251,7 +251,6 @@ class ExpenseController extends Controller
         ));
 
         $SqlOrder = $sortHelper->getSqlOrder($_GET);
-        l($SqlOrder);
 
         $criteria = new CDbCriteria(array(
             'select' => array(

@@ -9,16 +9,17 @@
  * @var $boundToNothingExpenses Array
  */
 ?>
-<h1><?php if ($model->type === Expense::TYPE_JOB)
-            echo 'Создание расхода на работу';
-          else
-            echo 'Редактирование расхода на работу';
-    ?></h1>
+<p><?php
+  if ($this->action->id == 'create')
+    echo '# Создание расхода на работу';
+  else
+    echo '# Редактирование расхода на работу';
+?></p>
 <?php $this->renderPartial('_form',array(
-    'model' => $model,
-    'partsAll' => $partsAll,
-    'jobsAll' => $jobsAll,
-    'garagesAll' => $garagesAll,
-    'boundToModelExpenses' => $boundToModelExpenses,
-    'boundToNothingExpenses' => $boundToNothingExpenses,
+  'model' => $model,
+  'partsAll' => $partsAll,
+  'jobsAll' => $jobsAll,
+  'garagesAll' => $garagesAll,
+  'boundToModelExpenses' => $boundToModelExpenses,
+  'boundToNothingExpenses' => $boundToNothingExpenses,
 )); ?>
