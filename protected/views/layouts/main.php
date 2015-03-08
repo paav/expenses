@@ -7,6 +7,7 @@ $baseUrl = Yii::app()->request->baseUrl;
 
 $jobRoute = 'jobExpense/create';
 $partRoute = 'partExpense/create'; 
+$fuelRoute = 'fuelExpense/create'; 
 $user = yii::app()->user;
 
 if (!$user->isGuest)
@@ -60,7 +61,7 @@ $isSimpleNav = function($route) {
   <?php else: ?>
   <nav class="container">
     <div class="row">
-      <div class="col-md-4">
+      <div class="col-md-5">
         <ul class="nav nav-links nav-links-rollover rolloverContainer-1">
           <?php if (!$this->isHome()): ?>
           <li>
@@ -85,12 +86,19 @@ $isSimpleNav = function($route) {
                 <div class="rollover-label">Добавить расход на запчасть</div>
               </div>
             </a>
+          <li class="<?php $ifAdd($fuelRoute, 'active'); ?>">
+            <a href="<?php echo $this->createUrl($fuelRoute); ?>">
+              <div class="rollover">
+                <div class="rollover-img"></div>
+                <div class="rollover-label">Добавить расход на топливо</div>
+              </div>
+            </a>
         </ul>
       </div>
       <div class="col-md-4">
         <ul class="nav nav-links nav-links-rollover rolloverContainer-2">
           <li>
-            <a href="<?php echo $this->createurl('user/update', array('id'=>$user->id)); ?>">
+            <a href="<?php echo $this->createUrl('user/update', array('id'=>$user->id)); ?>">
               <div class="rollover">
                 <img src="<?php echo $baseUrl . '/images/avatar_' . $gender . '.png'; ?>"></img>
                 <img src="<?php echo $baseUrl . '/images/avatar_' . $gender . '_hover.png'; ?>"></img>
@@ -102,7 +110,7 @@ $isSimpleNav = function($route) {
       <div class="col-md-2">
         <ul class="nav nav-links nav-links-rollover rolloverContainer-3">
           <li>
-            <a href="<?php echo $this->createurl('site/logout', array('id'=>$user->id)); ?>">
+            <a href="<?php echo $this->createUrl('site/logout', array('id'=>$user->id)); ?>">
               <div class="rollover">
                 <div class="rollover-img"></div>
               </div>

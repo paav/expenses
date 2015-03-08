@@ -9,16 +9,27 @@
 
 <?php
 switch($model->type_id):
-  case Contractor::TYPE_STORE:$placeholders=[
-    'name'=>'Введите название магазина',
-    'address'=>'Введите адрес магазина',
-    'note'=>'Введите коментарий о магазине',
-  ];break;
-  case Contractor::TYPE_GARAGE:$placeholders=[
-    'name'=>'Введите название мастерской',
-    'address'=>'Введите адрес мастерской',
-    'note'=>'Введите коментарий о мастерской',
-  ];break;
+	case Contractor::TYPE_STORE:
+		$placeholders=[
+			'name'=>'Введите название магазина',
+			'address'=>'Введите адрес магазина',
+			'note'=>'Введите коментарий о магазине',
+		];
+		break;
+	case Contractor::TYPE_GARAGE:
+		$placeholders=[
+			'name'=>'Введите название мастерской',
+			'address'=>'Введите адрес мастерской',
+			'note'=>'Введите коментарий о мастерской',
+		];
+		break;
+	case Contractor::TYPE_STATION:
+		$placeholders=[
+			'name'=>'Введите название заправки',
+			'address'=>'Введите адрес заправки',
+			'note'=>'Введите коментарий о заправки',
+		];
+		break;
 endswitch;
 ?>
 

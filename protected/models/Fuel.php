@@ -1,33 +1,23 @@
 <?php
 
 /**
- * This is the model class for table "contractor".
+ * This is the model class for table "fuel".
  *
- * The followings are the available columns in table 'contractor':
+ * The followings are the available columns in table 'fuel':
  * @property integer $id
  * @property string $name
- * @property integer $post_code
- * @property string $city
- * @property string $street
- * @property string $building
- * @property string $office
- * @property string $note
  *
  * The followings are the available model relations:
  * @property Expense[] $expenses
  */
-class Contractor extends CActiveRecord
+class Fuel extends CActiveRecord
 {
-    const TYPE_STORE = 1;
-    const TYPE_GARAGE = 2;
-    const TYPE_STATION = 3;
-
 	/**
 	 * @return string the associated database table name
 	 */
 	public function tableName()
 	{
-		return 'contractor';
+		return 'fuel';
 	}
 
 	/**
@@ -38,14 +28,11 @@ class Contractor extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-            array('type_id, name', 'required'),
-			array('type_id', 'numerical', 'integerOnly'=>true),
-			array('name, city', 'length', 'max'=>30),
-            array('address', 'length', 'max'=>50),
-			array('note', 'length', 'max'=>240),
+			array('name', 'required'),
+			array('name', 'length', 'max'=>255),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('name, city, address, note', 'safe', 'on'=>'search'),
+			array('id, name', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -57,8 +44,7 @@ class Contractor extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
-			'expenses' => array(self::HAS_MANY, 'Expense', 'contractor_id'),
-            'type' => array(self::BELONGS_TO, 'ContractorType', 'type_id'),
+			'expenses' => array(self::HAS_MANY, 'Expense', 'fuel_id'),
 		);
 	}
 
@@ -67,29 +53,9 @@ class Contractor extends CActiveRecord
 	 */
 	public function attributeLabels()
 	{
-		$name = 'name';
-
-        if (isset($this->type_id)) {
-            switch ($this->type_id) {
-                case self::TYPE_STORE:
-                    $name = 'Магазин';
-                    break;
-
-                case self::TYPE_GARAGE:
-                    $name = 'Мастерская';
-                    break;
-
-                case self::TYPE_STATION:
-                    $name = 'Заправка';
-                    break;
-            }
-        }
-
 		return array(
-			'name' => $name,
-			'city' => 'Город',
-			'address' => 'Адрес',
-			'note' => 'Комментарий',
+			'id' => 'ID',
+			'name' => 'Name',
 		);
 	}
 
@@ -113,12 +79,6 @@ class Contractor extends CActiveRecord
 
 		$criteria->compare('id',$this->id);
 		$criteria->compare('name',$this->name,true);
-		$criteria->compare('post_code',$this->post_code);
-		$criteria->compare('city',$this->city,true);
-		$criteria->compare('street',$this->street,true);
-		$criteria->compare('building',$this->building,true);
-		$criteria->compare('office',$this->office,true);
-		$criteria->compare('note',$this->note,true);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
@@ -129,20 +89,10 @@ class Contractor extends CActiveRecord
 	 * Returns the static model of the specified AR class.
 	 * Please note that you should have this exact method in all your CActiveRecord descendants!
 	 * @param string $className active record class name.
-	 * @return Contractor the static model class
+	 * @return Fuel the static model class
 	 */
 	public static function model($className=__CLASS__)
 	{
 		return parent::model($className);
 	}
-
-    public function type($contractorType)
-    {
-        $this->getDbCriteria()->mergeWith(array(
-            'condition'=>'type_id=:id',
-            'params'=>array(':id'=>$contractorType),
-        )); 
-        
-        return $this;
-    }
 }

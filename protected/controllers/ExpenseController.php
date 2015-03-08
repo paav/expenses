@@ -379,4 +379,12 @@ class ExpenseController extends Controller
 			Yii::app()->end();
 		}
 	}
+
+	public function getAbsUrlByModel($model, $action, array $params = array())
+	{
+		$route = get_class($model) . '/' . $action;
+
+		return $this->createAbsoluteUrl($route, $params);
+	}
+
 }

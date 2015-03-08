@@ -23,6 +23,7 @@ class Expense extends CActiveRecord
 {
     const TYPE_PART = 1;
     const TYPE_JOB = 2;
+    const TYPE_FUEL = 3;
 
     public $descr = '';
     public $type = '';
@@ -51,6 +52,10 @@ class Expense extends CActiveRecord
 
                 case self::TYPE_JOB:
                     $class = 'JobExpense';
+                    break;
+
+                case self::TYPE_FUEL:
+                    $class = 'FuelExpense';
                     break;
             }
         } else
@@ -95,6 +100,7 @@ class Expense extends CActiveRecord
             'expenseType' => array(self::BELONGS_TO, 'ExpenseType', 'expense_type_id'),
 			'part' => array(self::BELONGS_TO, 'Part', 'part_id'),
 			'job' => array(self::BELONGS_TO, 'Job', 'job_id'),
+			'fuel' => array(self::BELONGS_TO, 'Fuel', 'fuel_id'),
 		);
 	}
 
@@ -205,5 +211,16 @@ class Expense extends CActiveRecord
     public function getControllerName()
     {
         return lcfirst(get_class($this));
+    }
+
+    public function scopes()
+    {
+        return array(
+            'maxRun'=>array(
+                'select'=>'run',
+                'order'=>'run DESC',
+                'limit'=>1,
+            ),
+        );
     }
 }

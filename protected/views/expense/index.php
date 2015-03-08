@@ -71,30 +71,30 @@ $numberFormatter = yii::app()->numberFormatter;
             echo yii::app()->dateFormatter->format('dd.MM.yyyy',
               $expense->date);
           ?>
+
           <td class="text-right"><?php
             echo $expense->run ?
               $numberFormatter->formatDecimal($expense->run) . ' км' : 'нет';
           ?>
+
           <td><?php echo $expense->expenseType->name; ?>
+
           <td class="text-right"><?php
             echo $numberFormatter->formatDecimal($expense->cost);
           ?> руб.
-          <td><?php
-            echo $expense->descr;
-            $ctrl = $expense->type == Expense::TYPE_JOB ? 'JobExpense'
-                                                        : 'PartExpense';
-          ?>
+
+          <td><?php echo $expense->descr; ?>
+
           <td class="table-col-cmd"><a href="<?php
-            echo $this->createAbsoluteUrl($ctrl . '/view',
-              array( 'id'=>$expense->id));
-          ?>"><i class="fa fa-search fa-lg hover-scale"></i></a>
+						echo $this->getAbsUrlByModel($expense, 'view', array('id'=>$expense->id));
+					?>"><i class="fa fa-search fa-lg hover-scale"></i></a>
+
           <td class="table-col-cmd"><a href="<?php
-            echo $this->createAbsoluteUrl($ctrl . '/update',
-              array('id'=>$expense->id));
+						echo $this->getAbsUrlByModel($expense, 'update', array('id'=>$expense->id));
           ?>"><i class="fa fa-edit fa-lg hover-scale"></i></a>
+
           <td class="table-col-cmd"><a href="<?php
-            echo $this->createAbsoluteUrl('Expense/delete',
-              array('id'=>$expense->id));
+            echo $this->createAbsoluteUrl('Expense/delete', array('id'=>$expense->id));
           ?>"><i class="fa fa-remove fa-lg hover-scale"></i></a>
         <?php endforeach; ?>
     </table>

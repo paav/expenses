@@ -94,26 +94,32 @@ body {
   opacity: 0;
   transition: opacity 1s ease-in-out;
 }
-.rolloverContainer-1 > li:nth-last-child(3) .rollover:hover > .rollover-img {
+.rolloverContainer-1 > li:nth-last-child(4) .rollover:hover > .rollover-img {
   background-image: url('../images/home_hover.png');
 }
-.rolloverContainer-1 > li:nth-last-child(3) .rollover > .rollover-img {
+.rolloverContainer-1 > li:nth-last-child(4) .rollover > .rollover-img {
   background-image: url('../images/home.png');
 }
-.rolloverContainer-1 > li:nth-last-child(3) .rollover > .rollover-label {
+.rolloverContainer-1 > li:nth-last-child(4) .rollover > .rollover-label {
   height: 1em;
 }
-.rolloverContainer-1 > li:nth-last-child(2) .rollover:hover > .rollover-img {
+.rolloverContainer-1 > li:nth-last-child(3) .rollover:hover > .rollover-img {
   background-image: url('../images/add-job-expense-hover.png');
 }
-.rolloverContainer-1 > li:nth-last-child(2) .rollover > .rollover-img {
+.rolloverContainer-1 > li:nth-last-child(3) .rollover > .rollover-img {
   background-image: url('../images/add-job-expense.png');
 }
-.rolloverContainer-1 > li:nth-last-child(1) .rollover:hover > .rollover-img {
+.rolloverContainer-1 > li:nth-last-child(2) .rollover:hover > .rollover-img {
   background-image: url('../images/add-part-expense-hover.png');
 }
-.rolloverContainer-1 > li:nth-last-child(1) .rollover > .rollover-img {
+.rolloverContainer-1 > li:nth-last-child(2) .rollover > .rollover-img {
   background-image: url('../images/add-part-expense.png');
+}
+.rolloverContainer-1 > li:nth-last-child(1) .rollover:hover > .rollover-img {
+  background-image: url('../images/add-fuel-expense_hover.png');
+}
+.rolloverContainer-1 > li:nth-last-child(1) .rollover > .rollover-img {
+  background-image: url('../images/add-fuel-expense.png');
 }
 .rolloverContainer-2 > li .rollover {
   width: 140px;

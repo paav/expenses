@@ -171,7 +171,7 @@ body {
 }
 
 .rolloverContainer-1 > li {
-  &:nth-last-child(3) .rollover {
+  &:nth-last-child(4) .rollover {
     &:hover > .rollover-img {
       background-image: url('../images/home_hover.png');
     }
@@ -183,7 +183,7 @@ body {
     }
   }
 
-  &:nth-last-child(2) .rollover {
+  &:nth-last-child(3) .rollover {
     &:hover > .rollover-img {
       background-image: url('../images/add-job-expense-hover.png');
     }
@@ -192,12 +192,21 @@ body {
     }
   }
 
-  &:nth-last-child(1) .rollover {
+  &:nth-last-child(2) .rollover {
     &:hover > .rollover-img {
       background-image: url('../images/add-part-expense-hover.png');
     }
     > .rollover-img {
       background-image: url('../images/add-part-expense.png');
+    }
+  }
+
+  &:nth-last-child(1) .rollover {
+    &:hover > .rollover-img {
+      background-image: url('../images/add-fuel-expense_hover.png');
+    }
+    > .rollover-img {
+      background-image: url('../images/add-fuel-expense.png');
     }
   }
 }
