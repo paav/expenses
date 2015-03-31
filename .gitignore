@@ -1,4 +1,7 @@
 assets/
 protected/runtime/
 protected/data/*.db
+vendor/*
+!vendor/calendar/
+!vendor/pdate/
 

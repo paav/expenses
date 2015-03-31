@@ -1,8 +1,9 @@
 <?php
-// vim: ts=2:sw=2:sts=2:ft=htmlphp
-/**
- * @var $this Controller
- */
+// vim: ft=htmlphp
+
+/* @var $this Controller */
+
+// TODO: move to controller?
 $baseUrl = Yii::app()->request->baseUrl;
 
 $jobRoute = 'jobExpense/create';
@@ -46,6 +47,8 @@ $isSimpleNav = function($route) {
 <link href="<?php echo $baseUrl; ?>/css/main.css" rel="stylesheet">
 <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css"
       rel="stylesheet">
+<script src="<?php echo $baseUrl; ?>/vendor/requirejs/require.js"></script>
+<script src="<?php echo $baseUrl; ?>/js/main.js"></script>
 <title><?php echo $this->pageTitle; ?></title>
 <?php // To move footer to the page bottom. ?>
 <div class="l-rootContainer<?php echo $getPageClass(); ?>">

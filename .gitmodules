@@ -1,0 +1,7 @@
+[submodule "protected/vendor/calendar"]
+	path = vendor/calendar
+	url = git@github.com:paav/calendar.git
+[submodule "vendor/pdate"]
+	path = vendor/pdate
+	url = git@github.com:paav/pdate.git
+	branch = amd

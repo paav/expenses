@@ -1,0 +1,16 @@
+{
+  "name": "expenses",
+  "version": "0.1.0",
+  "authors": [
+    "Alexey Panteleiev <paav@inbox.ru>"
+  ],
+  "moduleType": [
+    "amd"
+  ],
+  "license": "MIT",
+  "dependencies": {
+    "lib": "paav/lib#amd",
+    "require-css": "~0.1.8",
+    "requirejs": "~2.1.16"
+  }
+}

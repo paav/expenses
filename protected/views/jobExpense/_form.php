@@ -20,8 +20,11 @@
     <div class="col-md-4">
       <div class="form-group">
         <?php echo $form->labelEx($model, 'date', array('class'=>'control-label')); ?>
-        <?php echo $form->dateField($model, 'date', array('class'=>'form-control',
-                'value'=>'2015-01-01')); ?>
+        <?php echo $form->textField($model, 'date', array('class'=>'form-control datesetter',
+                'value'=>'')); ?>
+        <?php //echo $form->labelEx($model, 'date', array('class'=>'control-label')); ?>
+        <?php //echo $form->dateField($model, 'date', array('class'=>'form-control',
+                //'value'=>'2015-01-01')); ?>
       </div>
       <div class="form-group">
         <?php echo $form->labelEx($model, 'run', array('class'=>'control-label')); ?>
