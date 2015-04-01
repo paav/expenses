@@ -2584,10 +2584,15 @@ output {
   transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
 }
 .form-control:focus {
-  border-color: #b02a27;
+  border-color: #1f1a17;
   outline: 0;
-  -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(176, 42, 39, 0.6);
-  box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(176, 42, 39, 0.6);
+  -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(31, 26, 23, 0.6);
+  box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(31, 26, 23, 0.6);
+}
+.form-control:focus {
+  background-color: #73c5ed;
+  -webkit-box-shadow: none;
+  box-shadow: none;
 }
 .form-control::-moz-placeholder {
   color: #999999;
@@ -2851,6 +2856,10 @@ select[multiple].form-group-lg .form-control {
 .has-success .form-control-feedback {
   color: #3c763d;
 }
+.has-success legend,
+.has-success .error-msg {
+  color: #3c763d;
+}
 .has-warning .help-block,
 .has-warning .control-label,
 .has-warning .radio,
@@ -2881,6 +2890,10 @@ select[multiple].form-group-lg .form-control {
 .has-warning .form-control-feedback {
   color: #8a6d3b;
 }
+.has-warning legend,
+.has-warning .error-msg {
+  color: #8a6d3b;
+}
 .has-error .help-block,
 .has-error .control-label,
 .has-error .radio,
@@ -2909,6 +2922,10 @@ select[multiple].form-group-lg .form-control {
   background-color: #f2dede;
 }
 .has-error .form-control-feedback {
+  color: red;
+}
+.has-error legend,
+.has-error .error-msg {
   color: red;
 }
 .has-feedback label ~ .form-control-feedback {
