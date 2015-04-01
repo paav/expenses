@@ -2,7 +2,7 @@ module.exports = function(grunt) {
   grunt.initConfig({
 
     less: {
-      compileLess: {
+      main: {
         options: {
           //compress: true,
         },
@@ -12,14 +12,14 @@ module.exports = function(grunt) {
         }
       },
 
-      compileBootstrapOverrides: {
+      bootstrapCustom: {
         options: {
           //compress: true,
         },
 
         files: {
-          'protected/vendor/bootstrap-custom/bootstrap-custom.css':
-            'protected/vendor/bootstrap-custom/bootstrap-custom.less', 
+          'css/bootstrap-custom.css':
+            'less/bootstrap-custom/bootstrap.less', 
         }
       }
     },
@@ -29,17 +29,17 @@ module.exports = function(grunt) {
         files: [
           'less/main.less',
         ],
-        tasks: ['less:compileLess'],
+        tasks: ['less:main'],
         options: {
           spawn: false,
         },
       },
 
-      BootstrapOverridesLess: {
+      BootstrapCustom: {
         files: [
-          'protected/vendor/bootstrap-custom/**/*less',
+          'less/bootstrap-custom/**/*less',
         ],
-        tasks: ['less:compileBootstrapOverrides'],
+        tasks: ['less:bootstrapCustom'],
         options: {
           spawn: false,
         },

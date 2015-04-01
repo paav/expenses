@@ -1,0 +1,60 @@
+// vim: ts=2:sw=2:sts=2
+// Forms
+// --------------------------------------------------
+
+
+// Normalize non-controls
+//
+// Restyle and baseline non-control form elements.
+
+legend {
+  margin-bottom: 5px;
+  /*font-size: (@font-size-base * 1.5);*/
+  font-weight: bold;
+  /*border-bottom: 2px solid @legend-border-color;*/
+}
+
+
+.form-control {
+  font-weight: bold;
+  border: 2px solid @input-border;
+  .transition(~"background-color ease-in-out .5s");
+}
+
+
+
+// Horizontal forms
+//
+// Horizontal forms are built on grid classes and allow you to create forms with
+// labels on the left and inputs on the right.
+
+.form-horizontal {
+
+  // Reset spacing and right align labels, but scope to media queries so that
+  // labels on narrow viewports stack the same as a default form example.
+  @media (min-width: @screen-sm-min) {
+    .control-label {
+      text-align: right;
+      /*padding-top: (@padding-base-vertical + 1); // Default padding plus a border*/
+    }
+  }
+
+  // Form group sizes
+  //
+  // Quick utility class for applying `.input-lg` and `.input-sm` styles to the
+  // inputs and labels within a `.form-group`.
+  .form-group-lg {
+    @media (min-width: @screen-sm-min) {
+      .control-label {
+        /*padding-top: ((@padding-large-vertical * @line-height-large) + 1);*/
+      }
+    }
+  }
+  .form-group-sm {
+    @media (min-width: @screen-sm-min) {
+      .control-label {
+        /*padding-top: (@padding-small-vertical + 1);*/
+      }
+    }
+  }
+}

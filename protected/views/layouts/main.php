@@ -41,8 +41,8 @@ $isSimpleNav = function($route) {
 <link href="//fonts.googleapis.com/css?family=Ubuntu:400,500,700&subset=latin,cyrillic"
       rel="stylesheet">
 <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
-<script src="<?php echo $baseUrl; ?>/protected/vendor/bootstrap/js/dropdown.js"></script>
-<link href="<?php echo $baseUrl; ?>/protected/vendor/bootstrap-custom/bootstrap-custom.css"
+<?php /*<script src="<?php echo $baseUrl; ?>/protected/vendor/bootstrap/js/dropdown.js"></script>*/ ?>
+<link href="<?php echo $baseUrl; ?>/css/bootstrap-custom.css"
       rel="stylesheet">
 <link href="<?php echo $baseUrl; ?>/css/main.css" rel="stylesheet">
 <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css"

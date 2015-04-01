@@ -1,0 +1,47 @@
+// vim: ts=2:sw=2:sts=2
+
+//
+// Navs
+// --------------------------------------------------
+
+
+// Base class
+// --------------------------------------------------
+
+.nav {
+  > li {
+    > a {
+      &:hover,
+      &:focus {
+        background-color: @nav-link-hover-bg;
+      }
+    }
+  }
+}
+
+
+// Links
+// -------------------------
+.nav-links {
+  > li {
+    float: left;
+
+    > a {
+      &:hover {
+        text-decoration: underline;
+      } 
+    }
+
+    + li {
+      margin-left: 0px;
+    }
+  }
+}
+
+// Rollover links
+// -------------------------
+.nav-links-rollover {
+  > li > a {
+    padding: 0;
+  }
+}

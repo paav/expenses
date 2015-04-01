@@ -1,0 +1,71 @@
+// vim: ts=2:sw=2:sts=2
+
+//
+// Tables
+// --------------------------------------------------
+
+table {
+  font-weight: @table-font-weight;
+  color: @table-font-color;
+}
+
+
+// Baseline styles
+
+.table {
+  // Bottom align for column headings
+  > thead > tr > th {
+    background-color: @table-caption-bg;
+    color: @table-caption-color;
+
+    > a {
+      color: @table-caption-color;
+      display: block;
+    }
+  }
+
+  .table-col-cmd {
+    a {
+      color: @table-col-cmd-color;
+    }
+  }
+
+  .table-col-active {
+    background-color: @table-col-active-bg;
+  }
+}
+
+
+// Bordered version
+//
+// Add borders all around the table and between all the columns.
+
+.table-bordered {
+  border: 2px solid @table-border-color;
+  > thead,
+  > tbody,
+  > tfoot {
+    > tr {
+      > th,
+      > td {
+        &.table-col-cmd {
+          border-left: 0;
+          border-right: 0;
+        }
+      }
+    }
+  }
+}
+
+
+// Predefined widths
+//
+// Can be used for assigning columns widths
+
+.table-width-1 {
+  width: @table-width-1;
+}
+
+.table-width-2 {
+  width: @table-width-2;
+}
