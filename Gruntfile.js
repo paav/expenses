@@ -45,10 +45,20 @@ module.exports = function(grunt) {
         },
       },
     },
+
+    bowerRequirejs: {
+      target: {
+        rjsConfig: 'js/config.js',
+        options: {
+          baseUrl: 'protected/vendor',
+        },
+      }
+    }
   });
 
   grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-contrib-less');
+  grunt.loadNpmTasks('grunt-bower-requirejs');
 
   grunt.registerTask('default', ['watch']);
 };
