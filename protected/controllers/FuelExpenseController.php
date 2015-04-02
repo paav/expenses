@@ -172,11 +172,13 @@ class FuelExpenseController extends Controller
 
         $fuelsAll = Fuel::model()->findAll(); 
         $stationsAll= Contractor::model()->type(Contractor::TYPE_STATION)->findAll();
+        $df = yii::app()->dateFormatter;
 
         $this->render('edit',array(
             'model'=>$model,
             'fuelsAll'=>$fuelsAll,
             'stationsAll'=>$stationsAll,
+            'df'=> $df,
         ));
     }
 }

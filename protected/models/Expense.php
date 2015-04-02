@@ -28,6 +28,14 @@ class Expense extends CActiveRecord
     public $descr = '';
     public $type = '';
 
+    public function __construct()
+    {
+        parent::__construct();
+
+        $date = new DateTime();
+        $this->date = $date->format('Y-m-d');
+    }
+
 	/**
 	 * @return string the associated database table name
 	 */
@@ -40,7 +48,8 @@ class Expense extends CActiveRecord
      * @param array $attributes
      * @return Car
      */
-    protected function instantiate($attributes){
+    protected function instantiate($attributes)
+    {
         if (isset($attributes['expense_type_id'])) {
 
             $type = $attributes['expense_type_id'];

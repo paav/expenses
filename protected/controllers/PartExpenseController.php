@@ -185,10 +185,13 @@ class PartExpenseController extends Controller
         $jobsAll = Job::model()->findAll(); 
         $storesAll= Contractor::model()->type(Contractor::TYPE_STORE)->findAll();
 
+        $df = yii::app()->dateFormatter;
+
         $this->render('edit',array(
             'model'=>$model,
             'partsAll'=>$partsAll,
             'storesAll'=>$storesAll,
+            'df'=> $df,
         ));
     }
 }

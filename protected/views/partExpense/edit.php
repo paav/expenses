@@ -16,4 +16,5 @@
     'model' => $model,
     'partsAll' => $partsAll,
     'storesAll' => $storesAll,
+    'df'=> $df,
 )); ?>

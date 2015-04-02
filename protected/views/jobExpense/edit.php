@@ -22,4 +22,5 @@
   'garagesAll' => $garagesAll,
   'boundToModelExpenses' => $boundToModelExpenses,
   'boundToNothingExpenses' => $boundToNothingExpenses,
+  'df'=> $df,
 )); ?>

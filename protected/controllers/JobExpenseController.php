@@ -201,6 +201,7 @@ class JobExpenseController extends Controller
         $boundToNothingExpenses = PartExpense::model()->findAll(
             'bound_id is NULL');
 
+        $df = yii::app()->dateFormatter;
 
         $this->render('edit', array(
             'model' => $model,
@@ -209,6 +210,7 @@ class JobExpenseController extends Controller
             'garagesAll' => $garagesAll,
             'boundToModelExpenses' => $boundToModelExpenses,
             'boundToNothingExpenses' => $boundToNothingExpenses,
+            'df'=> $df,
         ));
     }
 }

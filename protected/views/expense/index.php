@@ -68,8 +68,7 @@ $numberFormatter = yii::app()->numberFormatter;
         <?php foreach ($allExpenses as $expense): ?>
         <tr>
           <td><?php
-            echo yii::app()->dateFormatter->format('dd.MM.yyyy',
-              $expense->date);
+            echo yii::app()->dateFormatter->format('dd.MM.yyyy', $expense->date);
           ?>
 
           <td class="text-right"><?php

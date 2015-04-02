@@ -16,4 +16,5 @@
 		'model'=>$model,
 		'fuelsAll'=>$fuelsAll,
 		'stationsAll'=>$stationsAll,
+    'df'=>$df,
 )); ?>

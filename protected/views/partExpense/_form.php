@@ -6,6 +6,7 @@
  * @var $partsAll Array
  * @var $storesAll Contractor
  * @var $form CActiveForm
+ * @var $df CDateFormatter
  */
 ?>
 <?php $form = $this->beginWidget('CActiveForm', array(
@@ -18,8 +19,11 @@
     <div class="col-md-5">
       <div class="form-group">
         <?php echo $form->labelEx($model, 'date', array('class'=>'control-label')); ?>
-        <?php echo $form->dateField($model, 'date', array('class'=>'form-control',
-                'value'=>'2015-01-01')); ?>
+        <?php echo $form->textField($model, 'date', array(
+            'class'=>'form-control datesetter',
+            'value'=>$df->format('dd.MM.yyyy', $model->date),
+          ));
+        ?>
       </div>
       <div class="form-group">
         <?php echo $form->labelEx($model, 'part_id'); ?>

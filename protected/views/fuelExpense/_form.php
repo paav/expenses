@@ -1,12 +1,12 @@
 <?php
-// vim: ts=2:sw=2:sts=2:ft=htmlphp
-/**
- * @var $this FuelExpenseController
- * @var $model FuelExpense
- * @var $fuelsAll Array
- * @var $stationsAll Contractor
- * @var $form CActiveForm
- */
+// vim: ft=htmlphp
+
+/* @var $this FuelExpenseController */
+/* @var $model FuelExpense */
+/* @var $fuelsAll Array */
+/* @var $stationsAll Contractor */
+/* @var $form CActiveForm */
+/* @var $df CDateFormatter */
 ?>
 <?php $form = $this->beginWidget('CActiveForm', array(
   'htmlOptions'=>array(
@@ -18,9 +18,11 @@
     <div class="col-md-5">
       <div class="form-group">
         <?php echo $form->labelEx($model, 'date', array('class'=>'control-label')); ?>
-        <?php echo $form->dateField($model, 'date', array('class'=>'form-control',
-								'value'=>'2015-01-01'));
-				?>
+        <?php echo $form->textField($model, 'date', array(
+            'class'=>'form-control datesetter',
+            'value'=>$df->format('dd.MM.yyyy', $model->date),
+          ));
+        ?>
       </div>
       <div class="form-group">
         <?php echo $form->labelEx($model, 'run', array('class'=>'control-label')); ?>
