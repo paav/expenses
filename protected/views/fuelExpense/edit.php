@@ -67,9 +67,9 @@
               <td><?php echo $station->note; ?>
             <?php endforeach; ?>
         </table>
-        <a href="<?php echo $this->createAbsoluteUrl('contractor/create', array(
-												 'contractorType'=>3));
-                 ?>">Добавить заправку</a>
+        <a href="<?php
+            echo $this->createAbsoluteUrl('contractor/create', array('id'=>3));
+          ?>">Добавить заправку</a>
       </div>
     </div>
   </div>
