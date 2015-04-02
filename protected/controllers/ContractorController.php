@@ -54,13 +54,14 @@ class ContractorController extends Controller
 	 * Creates a new model.
 	 * If creation is successful, the browser will be redirected to the 'view' page.
 	 */
-	public function actionCreate($contractorType = Contractor::TYPE_STORE)
+	public function actionCreate($id = Contractor::TYPE_STORE)
 	{
-        if (!ContractorType::model()->findByPk($contractorType))
+        l($id);
+        if (!ContractorType::model()->findByPk($id))
             throw new CHttpException(404, 'The requested contractor type does not exist.');
 
         $model=new Contractor();
-        $model->type_id = $contractorType; 
+        $model->type_id = $id; 
 
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
@@ -76,7 +77,7 @@ class ContractorController extends Controller
         $contractorDp = new CActiveDataProvider('Contractor', array(
             'criteria' => array(
                 'condition' => 'type_id=:type',
-                'params' => array(':type' => $contractorType),
+                'params' => array(':type' => $id),
             )
         ));
 

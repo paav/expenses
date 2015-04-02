@@ -1,5 +1,6 @@
-# vim: ts=2:sts=2:sw=2
 <?php
+// vim: ft=htmlphp
+
 /* @var $this ContractorController */
 /* @var $model Contractor */
 /* @var $form CActiveForm */

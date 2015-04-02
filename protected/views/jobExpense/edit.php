@@ -70,8 +70,11 @@
               <td><?php echo $garage->note; ?>
             <?php endforeach; ?>
         </table>
-        <p><a href="<?php echo $this->createAbsoluteUrl('contractor/create/contractorType=2');
-                 ?>">Добавить мастерскую</a></p>
+        <p>
+          <a href="<?php
+              echo $this->createAbsoluteUrl('contractor/create/', array('id'=>2));
+            ?>">Добавить мастерскую</a>
+        </p>
       </div>
     </div>
   </div>

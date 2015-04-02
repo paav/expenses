@@ -1,9 +1,9 @@
 <?php
-// vim: ft=html:syntax=php
-/**
- * @var $this ExpenseController
- * @var $allExpenses array of Expense objects
- */
+// vim: ft=htmlphp
+
+/* @var $this ExpenseController */
+/* @var $allExpenses array of Expense objects */
+
 $this->pageTitle = 'Все расходы | Expenses';
 
 $cols = ['date' => 'Дата',
