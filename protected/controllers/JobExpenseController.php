@@ -190,10 +190,11 @@ class JobExpenseController extends Controller
             }
         }
 
-        $partsAll = Part::model()->findAll(); 
-        $jobsAll = Job::model()->findAll(); 
-        $garagesAll = Contractor::model()->type(Contractor::TYPE_GARAGE)
-                                          ->findAll();
+        $partsAll = Part::model()->findAll(array('order' => 'name')); 
+        $jobsAll = Job::model()->findAll(array('order' => 'name')); 
+        $garagesAll = Contractor::model()
+            ->type(Contractor::TYPE_GARAGE)
+            ->findAll(array('order' => 'name, address'));
         $boundToModelExpenses = Expense::model()->findAll('bound_id=:id', array(
             ':id'=> $model->id,
         ));

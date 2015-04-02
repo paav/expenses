@@ -33,13 +33,12 @@
       <div class="form-group">
         <?php echo $form->labelEx($model, 'part_id'); ?>
         <?php echo $form->error($model, 'part_id'); ?>
-        <?php echo $form->dropDownList($model, 'part_id', CHtml::listData($partsAll,
-                'id', function($part) {
-                  return $part->type->name . ' ' .
-                         $part->manufacturer . ' ' .
-                         $part->name . ' ' .
-                         $part->part_number;
-                }), array('size'=>'10','class'=>'form-control'));
+        <?php
+          echo $form->dropDownList(
+            $model, 'part_id',
+            CHtml::listData($partsAll, 'id', 'descr'),
+            array('size'=>'10','class'=>'form-control')
+          );
         ?>
       </div>
       <p><a href="<?php echo $this->createAbsoluteUrl('part/create');

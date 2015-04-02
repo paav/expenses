@@ -15,6 +15,8 @@
  */
 class Part extends CActiveRecord
 {
+    public $descr = '';
+
 	/**
 	 * @return string the associated database table name
 	 */
@@ -108,4 +110,18 @@ class Part extends CActiveRecord
 	{
 		return parent::model($className);
 	}
+
+    protected function afterFind()
+    {
+        $descrParts = [
+            $this->type->name,
+            $this->manufacturer,
+            $this->name,
+            $this->part_number,
+        ];
+
+        $this->descr = implode(' ', $descrParts);   
+
+        return parent::afterFind();
+    }
 }

@@ -182,8 +182,14 @@ class PartExpenseController extends Controller
         }
 
         $partsAll = Part::model()->findAll(); 
-        $jobsAll = Job::model()->findAll(); 
-        $storesAll= Contractor::model()->type(Contractor::TYPE_STORE)->findAll();
+        usort($partsAll, function($a, $b) {
+            return strcmp($a->descr, $b->descr);
+        });
+
+        $jobsAll = Job::model()->findAll(array('order' => 'name')); 
+        $storesAll= Contractor::model()
+            ->type(Contractor::TYPE_STORE)
+            ->findAll(array('order' => 'name, address'));
 
         $df = yii::app()->dateFormatter;
 

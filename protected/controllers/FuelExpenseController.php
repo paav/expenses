@@ -170,8 +170,11 @@ class FuelExpenseController extends Controller
             }
         }
 
-        $fuelsAll = Fuel::model()->findAll(); 
-        $stationsAll= Contractor::model()->type(Contractor::TYPE_STATION)->findAll();
+        $fuelsAll = Fuel::model()->findAll(array('order' => 'name')); 
+        $stationsAll= Contractor::model()
+            ->type(Contractor::TYPE_STATION)
+            ->findAll(array('order' => 'name, address'));
+
         $df = yii::app()->dateFormatter;
 
         $this->render('edit',array(
