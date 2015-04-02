@@ -71,6 +71,7 @@ class Expense extends CActiveRecord
             $class = get_class($this);
 
         $model = new $class(null);
+        $model->setIsNewRecord(false);
         $model->type = isset($type) ? $type : null;  
 
         return $model;
