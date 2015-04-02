@@ -44,7 +44,7 @@
           $jobsAll, 'id', 'name'), array('size'=>'10', 'class'=>'form-control'));
         ?>
       </div>
-      <p><a href="<?php $this->createAbsoluteUrl('job/create');
+      <p><a href="<?php echo $this->createAbsoluteUrl('job/create');
                ?>">Добавить работу</a></p>
     </div>
     <div class="col-md-8">
@@ -70,7 +70,7 @@
               <td><?php echo $garage->note; ?>
             <?php endforeach; ?>
         </table>
-        <p><a href="<?php $this->createAbsoluteUrl('contractor/create/contractorType=2');
+        <p><a href="<?php echo $this->createAbsoluteUrl('contractor/create/contractorType=2');
                  ?>">Добавить мастерскую</a></p>
       </div>
     </div>
@@ -161,7 +161,7 @@
         <?php endforeach; ?>
     </table>
   </div>
-  <p><a href="<?php $this->createAbsoluteUrl('partExpense/create');
+  <p><a href="<?php echo $this->createAbsoluteUrl('partExpense/create');
            ?>">Добавить расход на запчать</a></p>
   <div class="form-group">
     <?php echo CHtml::submitButton($model->isNewRecord ? 'Создать'

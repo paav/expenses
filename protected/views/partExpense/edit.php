@@ -42,8 +42,8 @@
                 }), array('size'=>'10','class'=>'form-control'));
         ?>
       </div>
-      <p><a href="<?php $this->createAbsoluteUrl('part/create');
-        ?>">Добабить добавить запчасть</a></p>
+      <p><a href="<?php echo $this->createAbsoluteUrl('part/create');
+        ?>">Добавить запчасть</a></p>
     </div>
     <div class="col-md-7">
       <div class="form-group">
@@ -68,8 +68,8 @@
               <td><?php echo $store->note; ?>
             <?php endforeach; ?>
         </table>
-        <a href="<?php $this->createAbsoluteUrl('contractor/create/contractorType=1');
-                 ?>">Добабить магазин</a>
+        <a href="<?php echo $this->createAbsoluteUrl('contractor/create/contractorType=1');
+                 ?>">Добавить магазин</a>
       </div>
     </div>
   </div>
