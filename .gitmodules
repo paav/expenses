@@ -5,3 +5,7 @@
 	path = vendor/pdate
 	url = git@github.com:paav/pdate.git
 	branch = amd
+[submodule "vendor/lib"]
+	path = vendor/lib
+	url = git@github.com:paav/lib.git
+	branch = amd

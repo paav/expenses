@@ -4,4 +4,4 @@ protected/data/*.db
 vendor/*
 !vendor/calendar/
 !vendor/pdate/
-
+!vendor/lib/
