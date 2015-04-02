@@ -33,6 +33,7 @@ class FuelExpense extends Expense
 		// class name for the relations automatically generated below.
         $relations = array(
 			'fuel' => array(self::BELONGS_TO, 'Fuel', 'fuel_id'),
+			'contractor' => array(self::BELONGS_TO, 'Contractor', 'contractor_id'),
 		);
 
 		return array_merge(parent::relations(), $relations); 	
@@ -106,7 +107,7 @@ class FuelExpense extends Expense
     protected function afterFind()
     {
         $this->cost = $this->quantity * $this->unit_price;
-        $this->descr = $this->fuel->name;   
+        $this->descr = $this->contractor->name . ' ' . $this->fuel->name;   
 
         return parent::afterFind();
     }
