@@ -55,6 +55,7 @@
             <th>Название
             <th>Адрес
             <th>Комментарий
+            <th colspan="3">
         <tbody>
           <?php foreach ($storesAll as $store): ?>
           <tr>
@@ -65,9 +66,30 @@
             <td><?php echo $store->name; ?>
             <td><?php echo $store->address; ?>
             <td><?php echo $store->note; ?>
+
+            <td class="table-col-cmd"><a href="<?php
+                echo $this->createAbsoluteUrl(
+                  'contractor/view',
+                  array('id'=>$store->id)
+                );
+              ?>"><i class="fa fa-search fa-lg hover-scale"></i></a>
+
+            <td class="table-col-cmd"><a href="<?php
+                echo $this->createAbsoluteUrl(
+                  'contractor/update',
+                  array('id'=>$store->id)
+                );
+              ?>"><i class="fa fa-edit fa-lg hover-scale"></i></a>
+
+            <td class="table-col-cmd"><a href="<?php
+                echo $this->createAbsoluteUrl(
+                  'contractor/delete',
+                   array('id'=>$store->id)
+                );
+              ?>"><i class="fa fa-remove fa-lg hover-scale"></i></a>
           <?php endforeach; ?>
       </table>
-      <a href="<?php echo $this->createAbsoluteUrl('contractor/create/contractorType=1');
+      <a href="<?php echo $this->createAbsoluteUrl('contractor/create/1');
                ?>">Добавить магазин</a>
     </div>
   </div>

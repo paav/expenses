@@ -79,37 +79,4 @@ endswitch;
     <?php endif; ?>
   </div>
 <?php $this->endWidget(); ?>
-
-
-  <p>Все магазины</p>
-
-  <?php $this->widget('zii.widgets.grid.CGridView', array(
-    'dataProvider'=>$contractorDp,
-    'cssFile'=>yii::app()->getBaseUrl().'/css/grid_contractors.css',
-    'columns'=>array(
-      'name',
-//      'city',
-      'address',
-      'note', 
-      array(
-        'class'=>'CLinkColumn',
-        'label'=>'',
-        'urlExpression'=>function($data){
-           return $this->createAbsoluteUrl('contractor/view',array('id'=>$data->id));
-        },
-        'linkHtmlOptions'=>array('class'=>'icon-search'),
-        'headerHtmlOptions'=>array('class'=>'link'),
-      ),
-      array(
-        'class'=>'CLinkColumn',
-        'label'=>'',
-        'urlExpression'=>function($data){
-           return $this->createAbsoluteUrl('contractor/update',array('id'=>$data->id));
-        },
-        'linkHtmlOptions'=>array('class'=>'icon-pen'),
-        'headerHtmlOptions'=>array('class'=>'link'),
-      ),
-    ),
-  )); ?> 
-
 </div><!-- form -->

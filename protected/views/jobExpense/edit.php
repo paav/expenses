@@ -58,6 +58,7 @@
               <th>Название
               <th>Адрес
               <th>Комментарий
+              <th colspan="3">
           <tbody>
             <?php foreach ($garagesAll as $garage): ?>
             <tr>
@@ -68,6 +69,27 @@
               <td><?php echo $garage->name; ?>
               <td><?php echo $garage->address; ?>
               <td><?php echo $garage->note; ?>
+
+              <td class="table-col-cmd"><a href="<?php
+                  echo $this->createAbsoluteUrl(
+                    'contractor/view',
+                    array('id'=>$garage->id)
+                  );
+                ?>"><i class="fa fa-search fa-lg hover-scale"></i></a>
+
+              <td class="table-col-cmd"><a href="<?php
+                  echo $this->createAbsoluteUrl(
+                    'contractor/update',
+                    array('id'=>$garage->id)
+                  );
+                ?>"><i class="fa fa-edit fa-lg hover-scale"></i></a>
+
+              <td class="table-col-cmd"><a href="<?php
+                  echo $this->createAbsoluteUrl(
+                    'contractor/delete',
+                     array('id'=>$garage->id)
+                  );
+                ?>"><i class="fa fa-remove fa-lg hover-scale"></i></a>
             <?php endforeach; ?>
         </table>
         <p>
