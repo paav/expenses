@@ -23,7 +23,7 @@ class ExpenseController extends Controller
 		return array(
 			array('allow',  // allow all users to perform 'index' and 'view' actions
 				//'actions'=>array('delete','index','view','create','update'),
-				'actions'=>array('index'),
+				'actions'=>array('index', 'delete'),
 				'users'=>array('@'),
 			),
             /*
