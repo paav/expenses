@@ -16,4 +16,10 @@ function l($var)
     echo Yii::trace(CVarDumper::dumpAsString($var),'vardump');
 }
 
+function le($var)
+{
+    l($var);
+    exit;
+}
+
 Yii::createWebApplication($config)->run();
