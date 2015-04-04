@@ -14,6 +14,13 @@
   else
     echo '# Редактирование расхода на топливо';
 ?></p>
+<div class="row">
+  <?php
+    $this->widget('ext.paavtable.PaavTable', array(
+      'dataProvider'=>$contractorsDp
+    ));
+  ?>
+</div>
 <?php $form = $this->beginWidget('CActiveForm', array(
   'htmlOptions'=>array(
     'class'=>'form',

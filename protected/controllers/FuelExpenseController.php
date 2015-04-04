@@ -175,6 +175,13 @@ class FuelExpenseController extends Controller
             ->type(Contractor::TYPE_STATION)
             ->findAll(array('order' => 'name, address'));
 
+        $contractorsDp = new CActiveDataProvider('Contractor', array(
+            'criteria' => array(
+                'condition' => 'type_id=?',
+                'params' => array(Contractor::TYPE_STATION),
+            ),
+        ));
+
         $df = yii::app()->dateFormatter;
 
         $this->render('edit',array(
@@ -182,6 +189,7 @@ class FuelExpenseController extends Controller
             'fuelsAll'=>$fuelsAll,
             'stationsAll'=>$stationsAll,
             'df'=> $df,
+            'contractorsDp' => $contractorsDp,
         ));
     }
 }
