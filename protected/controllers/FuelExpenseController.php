@@ -184,6 +184,12 @@ class FuelExpenseController extends Controller
 
         $df = yii::app()->dateFormatter;
 
+        $pages = new CPagination($contractorsDp->totalItemCount);
+        $pages->pageSize = 3;
+        $pages->applyLimit($contractorsDp->criteria);
+
+        $contractorsDp->pagination = $pages;
+
         $this->render('edit',array(
             'model'=>$model,
             'fuelsAll'=>$fuelsAll,
