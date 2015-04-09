@@ -58,6 +58,15 @@ table {
 }
 
 
+// Command cell -- e.g. cell with view/update/delete links
+
+.table-cell-cmd {
+  > a {
+    padding: 0 5px 0 5px;
+  }
+}
+
+
 // Predefined widths
 //
 // Can be used for assigning columns widths
@@ -68,4 +77,13 @@ table {
 
 .table-width-2 {
   width: @table-width-2;
+}
+
+// New
+.table-cell-width-120 {
+  width: 120px;
+}
+
+.table-cell-width-250 {
+  width: 250px;
 }

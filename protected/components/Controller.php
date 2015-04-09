@@ -58,4 +58,11 @@ class Controller extends CController
 
         return parent::beforeAction($action);
     }
+
+    protected function beforeRender($view)
+    {
+        Yii::setPathOfAlias('components', Yii::app()->basePath . '/components');
+
+        return parent::beforeRender($view);
+    }
 }

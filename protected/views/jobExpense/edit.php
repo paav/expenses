@@ -5,7 +5,7 @@
 /* @var $model JobExpense */
 /* @var $jobsAll Array */
 /* @var $boundToModelExpenses Array */
-/* @var $garagesAll Contractor */
+/* @var $contractorsDp CActiveDataProvider */
 /* @var $boundToNothingExpenses Array */
 /* @var $form CActiveForm */
 /* @var $df CDateFormatter */
@@ -51,52 +51,21 @@
       <div class="form-group">
         <?php echo $form->labelEx($model, 'contractor_id'); ?>
         <?php echo $form->error($model, 'contractor_id'); ?>
-        <table class="table table-bordered table-hover">
-          <thead>
-            <tr>
-              <th>
-              <th>Название
-              <th>Адрес
-              <th>Комментарий
-              <th colspan="3">
-          <tbody>
-            <?php foreach ($garagesAll as $garage): ?>
-            <tr>
-              <td><?php echo $form->radioButton($model, 'contractor_id', array(
-                          'uncheckValue'=>null,
-                          'value'=>$garage->id));
-                  ?>
-              <td><?php echo $garage->name; ?>
-              <td><?php echo $garage->address; ?>
-              <td><?php echo $garage->note; ?>
 
-              <td class="table-col-cmd"><a href="<?php
-                  echo $this->createAbsoluteUrl(
-                    'contractor/view',
-                    array('id'=>$garage->id)
-                  );
-                ?>"><i class="fa fa-search fa-lg hover-scale"></i></a>
+        <?php
+          $this->widget('ext.paavtable.PaavTable', array(
+            'dataProvider'=>$contractorsDp,
+            'columns'=>array('name','address','note'),
+            'view'=>'components.paavtable-custom.views.table',
+            'data'=>array('model'=>$model),
+          ));
+        ?>
 
-              <td class="table-col-cmd"><a href="<?php
-                  echo $this->createAbsoluteUrl(
-                    'contractor/update',
-                    array('id'=>$garage->id)
-                  );
-                ?>"><i class="fa fa-edit fa-lg hover-scale"></i></a>
-
-              <td class="table-col-cmd"><a href="<?php
-                  echo $this->createAbsoluteUrl(
-                    'contractor/delete',
-                     array('id'=>$garage->id)
-                  );
-                ?>"><i class="fa fa-remove fa-lg hover-scale"></i></a>
-            <?php endforeach; ?>
-        </table>
-        <p>
-          <a href="<?php
-              echo $this->createAbsoluteUrl('contractor/create/', array('id'=>2));
-            ?>">Добавить мастерскую</a>
-        </p>
+        <a href="<?php
+            echo $this->createAbsoluteUrl('contractor/create',array(
+              'id'=>Contractor::TYPE_GARAGE
+            ));
+          ?>">Добавить мастерскую</a>
       </div>
     </div>
   </div>
