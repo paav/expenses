@@ -266,6 +266,10 @@ class ExpenseController extends Controller
                 'job',
             ),
             'order' => $SqlOrder,
+            'condition' => 'user_id=:user_id',
+            'params' => array(
+                ':user_id' => Yii::app()->user->id 
+            )
         ));
 
         if (isset($_GET['SearchForm'])) {
