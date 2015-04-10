@@ -177,6 +177,8 @@ class Expense extends CActiveRecord
         Yii::app()->format->dateFormat = 'Y-m-d';
         $this->date = Yii::app()->format->date($this->date);
 
+        $this->user_id = Yii::app()->user->id;
+
         return parent::beforeSave();
     }
 
