@@ -165,3 +165,13 @@ footer p {
 .paavpager-info {
   margin-right: 15px;
 }
+.aTable-contractor > thead > tr > th:nth-child(1) {
+  width: 30px;
+}
+.aTable-contractor > thead > tr > th:nth-child(2),
+.aTable-contractor > thead > tr > th:nth-child(3) {
+  width: 120px;
+}
+.aTable-contractor > thead > tr > th:nth-child(5) {
+  width: 110px;
+}

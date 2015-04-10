@@ -2500,6 +2500,9 @@ table {
   border-left: 0;
   border-right: 0;
 }
+.table-cell-cmd > a {
+  padding: 0 5px 0 5px;
+}
 .table-width-1 {
   width: 11%;
 }

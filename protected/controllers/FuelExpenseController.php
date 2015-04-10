@@ -80,7 +80,7 @@ class FuelExpenseController extends Controller
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
 
-        $model = PartExpense::model()->findByPk($id);
+        $model = FuelExpense::model()->findByPk($id);
 
         $this->handleRequest($model);
 	}
@@ -171,17 +171,31 @@ class FuelExpenseController extends Controller
         }
 
         $fuelsAll = Fuel::model()->findAll(array('order' => 'name')); 
-        $stationsAll= Contractor::model()
-            ->type(Contractor::TYPE_STATION)
-            ->findAll(array('order' => 'name, address'));
+
+        $contractorsDp = new CActiveDataProvider('Contractor', array(
+            'criteria' => array(
+                'condition' => 'type_id=?',
+                'params' => array(Contractor::TYPE_STATION),
+            ),
+            'sort' => array(
+                'attributes' => array('name', 'address'),
+                'defaultOrder' => array('name' => CSort::SORT_ASC)
+            )
+        ));
+
+        $pages = new CPagination($contractorsDp->totalItemCount);
+        $pages->pageSize = 8;
+        $pages->applyLimit($contractorsDp->criteria);
+
+        $contractorsDp->pagination = $pages;
 
         $df = yii::app()->dateFormatter;
 
         $this->render('edit',array(
             'model'=>$model,
             'fuelsAll'=>$fuelsAll,
-            'stationsAll'=>$stationsAll,
             'df'=> $df,
+            'contractorsDp' => $contractorsDp,
         ));
     }
 }

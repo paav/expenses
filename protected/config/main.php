@@ -104,7 +104,7 @@ return array(
                         'changeYear'=>true,
                     ),
                 ),
-                'PaavPager' => array(
+                'PaavPagerOld' => array(
                     'cssFile' => false,
                     'nextPageCssClass' => 'btn btn-default',
                     'previousPageCssClass' => 'btn btn-default',

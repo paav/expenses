@@ -4,7 +4,7 @@
 /* @var $this PartExpenseController */
 /* @var $model PartExpense */
 /* @var $partsAll Array */
-/* @var $storesAll Contractor */
+/* @var $contractorsDp CActiveDataProvider */
 /* @var $form CActiveForm */
 /* @var $df CDateFormatter */
 ?>
@@ -48,49 +48,21 @@
     <div class="form-group">
       <?php echo $form->labelEx($model, 'contractor_id'); ?>
       <?php echo $form->error($model, 'contractor_id'); ?>
-      <table class="table table-bordered table-hover">
-        <thead>
-          <tr>
-            <th>
-            <th>Название
-            <th>Адрес
-            <th>Комментарий
-            <th colspan="3">
-        <tbody>
-          <?php foreach ($storesAll as $store): ?>
-          <tr>
-            <td><?php echo $form->radioButton($model, 'contractor_id', array(
-                        'uncheckValue'=>null,
-                        'value'=>$store->id));
-                ?>
-            <td><?php echo $store->name; ?>
-            <td><?php echo $store->address; ?>
-            <td><?php echo $store->note; ?>
 
-            <td class="table-col-cmd"><a href="<?php
-                echo $this->createAbsoluteUrl(
-                  'contractor/view',
-                  array('id'=>$store->id)
-                );
-              ?>"><i class="fa fa-search fa-lg hover-scale"></i></a>
+      <?php
+        $this->widget('ext.paavtable.PaavTable', array(
+          'dataProvider'=>$contractorsDp,
+          'columns'=>array('name','address','note'),
+          'view'=>'components.paavtable-custom.views.table',
+          'data'=>array('model'=>$model),
+        ));
+      ?>
 
-            <td class="table-col-cmd"><a href="<?php
-                echo $this->createAbsoluteUrl(
-                  'contractor/update',
-                  array('id'=>$store->id)
-                );
-              ?>"><i class="fa fa-edit fa-lg hover-scale"></i></a>
-
-            <td class="table-col-cmd"><a href="<?php
-                echo $this->createAbsoluteUrl(
-                  'contractor/delete',
-                   array('id'=>$store->id)
-                );
-              ?>"><i class="fa fa-remove fa-lg hover-scale"></i></a>
-          <?php endforeach; ?>
-      </table>
-      <a href="<?php echo $this->createAbsoluteUrl('contractor/create/1');
-               ?>">Добавить магазин</a>
+      <a href="<?php
+          echo $this->createAbsoluteUrl('contractor/create', array(
+            'id'=>Contractor::TYPE_STORE
+          ));
+        ?>">Добавить магазин</a>
     </div>
   </div>
 </div>

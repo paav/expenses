@@ -1,13 +1,62 @@
 <?php
 
-class PaavPager extends CLinkPager
+class PaavPagerOld extends CLinkPager
 {
     public $infoCssClass;
     public $buttonsCssClass;
-
 	public $previousPageCssClass='paavpager-prev';
 	public $nextPageCssClass='paavpager-next';
 
+	/**
+	 * Initializes the pager by setting some default property values.
+	 */
+	public function init()
+	{
+		if($this->nextPageLabel===null)
+			$this->nextPageLabel=Yii::t('yii','Next &gt;');
+		if($this->prevPageLabel===null)
+			$this->prevPageLabel=Yii::t('yii','&lt; Previous');
+		if($this->firstPageLabel===null)
+			$this->firstPageLabel=Yii::t('yii','&lt;&lt; First');
+		if($this->lastPageLabel===null)
+			$this->lastPageLabel=Yii::t('yii','Last &gt;&gt;');
+        if($this->header===null)
+            $this->header = $this->_getHeader();
+		if(!isset($this->htmlOptions['class']))
+			$this->htmlOptions['class']='paavpager';
+        if ($this->cssFile === null) {
+            $file=dirname(__FILE__).DIRECTORY_SEPARATOR.'pager.css';
+            $this->cssFile=Yii::app()->getAssetManager()->publish($file);
+        }
+
+        $this->maxButtonCount = 0;
+
+		if($this->infoCssClass === null)
+            $this->infoCssClass = 'paavpager-info';
+
+		if($this->buttonsCssClass === null)
+            $this->buttonsCssClass = 'paavpager-buttons';
+	}
+
+	/**
+	 * Executes the widget.
+	 * This overrides the parent implementation by displaying the generated page buttons.
+	 */
+	public function run()
+	{
+		$this->registerClientScript();
+		$buttons=$this->createPageButtons();
+		if(empty($buttons))
+			return;
+
+        $headerHtml = CHtml::tag('span',
+                                 array('class' => $this->infoCssClass),
+                                 $this->header);
+        $buttonsHtml = CHtml::tag('div',
+                                  array('class' => $this->buttonsCssClass),
+                                  implode("\n",$buttons));
+        echo CHtml::tag('div', $this->htmlOptions, $headerHtml . $buttonsHtml);
+	}
 
 	/**
 	 * Creates the page buttons.
@@ -45,28 +94,6 @@ class PaavPager extends CLinkPager
 		return $buttons;
 	}
 
-
-	/**
-	 * Executes the widget.
-	 * This overrides the parent implementation by displaying the generated page buttons.
-	 */
-	public function run()
-	{
-		$this->registerClientScript();
-		$buttons=$this->createPageButtons();
-		if(empty($buttons))
-			return;
-
-        $headerHtml = CHtml::tag('span',
-                                 array('class' => $this->infoCssClass),
-                                 $this->header);
-        $buttonsHtml = CHtml::tag('div',
-                                  array('class' => $this->buttonsCssClass),
-                                  implode("\n",$buttons));
-        echo CHtml::tag('div', $this->htmlOptions, $headerHtml . $buttonsHtml);
-	}
-
-
 	/**
 	 * Creates a page button.
 	 * You may override this method to customize the page buttons.
@@ -85,36 +112,6 @@ class PaavPager extends CLinkPager
 	}
 
 
-	/**
-	 * Initializes the pager by setting some default property values.
-	 */
-	public function init()
-	{
-		if($this->nextPageLabel===null)
-			$this->nextPageLabel=Yii::t('yii','Next &gt;');
-		if($this->prevPageLabel===null)
-			$this->prevPageLabel=Yii::t('yii','&lt; Previous');
-		if($this->firstPageLabel===null)
-			$this->firstPageLabel=Yii::t('yii','&lt;&lt; First');
-		if($this->lastPageLabel===null)
-			$this->lastPageLabel=Yii::t('yii','Last &gt;&gt;');
-        if($this->header===null)
-            $this->header = $this->_getHeader();
-		if(!isset($this->htmlOptions['class']))
-			$this->htmlOptions['class']='paavpager';
-        if ($this->cssFile === null) {
-            $file=dirname(__FILE__).DIRECTORY_SEPARATOR.'pager.css';
-            $this->cssFile=Yii::app()->getAssetManager()->publish($file);
-        }
-
-        $this->maxButtonCount = 0;
-
-		if($this->infoCssClass === null)
-            $this->infoCssClass = 'paavpager-info';
-
-		if($this->buttonsCssClass === null)
-            $this->buttonsCssClass = 'paavpager-buttons';
-	}
 
     private function _getHeader()
     {

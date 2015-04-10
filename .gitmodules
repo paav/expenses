@@ -9,3 +9,6 @@
 	path = vendor/lib
 	url = git@github.com:paav/lib.git
 	branch = amd
+[submodule "protected/extensions/paavtable"]
+	path = protected/extensions/paavtable
+	url = git@github.com:paav/paavtable.git

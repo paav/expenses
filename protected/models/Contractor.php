@@ -67,7 +67,7 @@ class Contractor extends CActiveRecord
 	 */
 	public function attributeLabels()
 	{
-		$name = 'name';
+		$name = 'Название';
 
         if (isset($this->type_id)) {
             switch ($this->type_id) {

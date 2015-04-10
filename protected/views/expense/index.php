@@ -28,7 +28,7 @@ $numberFormatter = yii::app()->numberFormatter;
     </form>
   </div>
   <div class="col-md-6">
-    <?php $this->widget('ext.paav-pager.PaavPager', array('pages'=>$pages)); ?>
+    <?php $this->widget('ext.paavpager.PaavPagerOld', array('pages'=>$pages)); ?>
   </div>
 </div>
 <div class="row">
