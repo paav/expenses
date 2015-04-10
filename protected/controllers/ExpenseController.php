@@ -244,8 +244,8 @@ class ExpenseController extends Controller
             // Valid attrs for sorting.
             // First element is set as sort by element.
             // Attr => SQL ORDER BY clause substring.
-            'run' => 'run',
             'date' => 'date',
+            'run' => 'run',
             'type' => 'expenseType.name',
             'cost' => 'cost',
         ));
