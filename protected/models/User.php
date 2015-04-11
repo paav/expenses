@@ -14,7 +14,7 @@
  * The followings are the available model relations:
  * @property Gender $gender
  */
-class User extends CActiveRecord
+class User extends PaavActiveRecord
 {
 	private $_identity;
 

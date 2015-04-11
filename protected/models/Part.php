@@ -13,7 +13,7 @@
  * The followings are the available model relations:
  * @property Expense[] $expenses
  */
-class Part extends CActiveRecord
+class Part extends PaavActiveRecord
 {
     public $descr = '';
 

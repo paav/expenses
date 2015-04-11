@@ -10,7 +10,7 @@
  * The followings are the available model relations:
  * @property Contractor[] $contractors
  */
-class ContractorType extends CActiveRecord
+class ContractorType extends PaavActiveRecord
 {
 	/**
 	 * @return string the associated database table name

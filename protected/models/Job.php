@@ -11,7 +11,7 @@
  * The followings are the available model relations:
  * @property Expense[] $expenses
  */
-class Job extends CActiveRecord
+class Job extends PaavActiveRecord
 {
 	/**
 	 * @return string the associated database table name

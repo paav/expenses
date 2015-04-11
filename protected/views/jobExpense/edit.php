@@ -74,12 +74,11 @@
       <div class="form-group">
         <?php echo $form->labelEx($model, 'cost'); ?>
         <?php echo $form->error($model, 'cost'); ?>
-        <?php echo $form->numberField($model, 'cost', array('class'=>'form-control',
-                'min'=>'0',
-                'max'=>'999999',
-                'step'=>'0.01',
-                'placeholder'=>'0.00'
-              ));
+        <?php
+          echo $form->textField($model, 'cost', array(
+            'class'=>'form-control',
+            'placeholder'=>'0,00'
+          ));
         ?> руб.
       </div>
     </div>

@@ -71,13 +71,11 @@
     <div class="form-group">
       <?php echo $form->labelEx($model, 'unit_price'); ?>
       <?php echo $form->error($model, 'unit_price'); ?>
-      <?php echo $form->numberField($model, 'unit_price',
-              array('class'=>'form-control',
-                'min'=>'0',
-                'max'=>'999999',
-                'step'=>'0.01',
-                'placeholder'=>'0.00'
-              ));
+      <?php
+        echo $form->textField($model, 'unit_price', array(
+          'class'=>'form-control',
+          'placeholder'=>'0,00'
+        ));
       ?> руб.
     </div>
   </div>
@@ -85,12 +83,11 @@
     <div class="form-group">
       <?php echo $form->labelEx($model, 'quantity'); ?>
       <?php echo $form->error($model, 'quantity'); ?>
-      <?php echo $form->numberField($model, 'quantity',
-              array('class'=>'form-control',
-                'min'=>'1',
-                'max'=>'999999',
-                'step'=>'1',
-              ));
+      <?php
+        echo $form->textField($model, 'quantity', array(
+          'class'=>'form-control',
+          'placeholder'=>'0,00'
+        ));
       ?> шт.
     </div>
   </div>

@@ -10,7 +10,7 @@
  * The followings are the available model relations:
  * @property User[] $users
  */
-class Gender extends CActiveRecord
+class Gender extends PaavActiveRecord
 {
     const MALE = 1;
     const FEMALE = 2;

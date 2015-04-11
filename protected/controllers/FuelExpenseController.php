@@ -64,7 +64,6 @@ class FuelExpenseController extends Controller
 		// $this->performAjaxValidation($model);
 
         $model = new FuelExpense;
-        $model->quantity = 1;
         $model->run = Expense::model()->maxRun()->find()->run ?: null;
 
         $this->handleRequest($model);
@@ -190,6 +189,8 @@ class FuelExpenseController extends Controller
         $contractorsDp->pagination = $pages;
 
         $df = yii::app()->dateFormatter;
+
+        $model->formatForView(true);
 
         $this->render('edit',array(
             'model'=>$model,

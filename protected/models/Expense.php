@@ -19,7 +19,7 @@
  * The followings are the available model relations:
  * @property Contractor $contractor
  */
-class Expense extends CActiveRecord
+class Expense extends PaavActiveRecord
 {
     const TYPE_PART = 1;
     const TYPE_JOB = 2;
@@ -234,5 +234,21 @@ class Expense extends CActiveRecord
                 'limit'=>1,
             ),
         );
+    }
+
+    public function _formatForView($isForForm = false)
+    {
+        if ($isForForm) {
+        } else {
+            $this->run = $nf->format('#0.00', $this->run);
+        }
+        $attrs = $this->attributes;
+        $nf = Yii::app()->numberFormatter;
+
+        foreach  ($attrs as $name => $value) {
+            if (!is_null($value) && is_float((float)$value)) {
+                    //$this->$name = $nf->formatDecimal($value);
+            }
+        }
     }
 }

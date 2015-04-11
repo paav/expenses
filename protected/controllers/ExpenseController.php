@@ -318,7 +318,7 @@ class ExpenseController extends Controller
         $count = Expense::model()->count($criteria);
 
         $pages = new CPagination($count);
-        $pages->pageSize = 10;
+        $pages->pageSize = 20;
         $pages->applyLimit($criteria);
 
         $allExpenses = Expense::model()->findAll($criteria);

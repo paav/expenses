@@ -10,7 +10,7 @@
  * The followings are the available model relations:
  * @property Part[] $parts
  */
-class PartType extends CActiveRecord
+class PartType extends PaavActiveRecord
 {
 	/**
 	 * @return string the associated database table name

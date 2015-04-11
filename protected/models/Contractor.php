@@ -16,7 +16,7 @@
  * The followings are the available model relations:
  * @property Expense[] $expenses
  */
-class Contractor extends CActiveRecord
+class Contractor extends PaavActiveRecord
 {
     const TYPE_STORE = 1;
     const TYPE_GARAGE = 2;

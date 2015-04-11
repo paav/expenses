@@ -10,7 +10,7 @@
  * The followings are the available model relations:
  * @property Expense[] $expenses
  */
-class Fuel extends CActiveRecord
+class Fuel extends PaavActiveRecord
 {
 	/**
 	 * @return string the associated database table name

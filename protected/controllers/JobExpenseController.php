@@ -218,6 +218,8 @@ class JobExpenseController extends Controller
 
         $df = yii::app()->dateFormatter;
 
+        $model->formatForView(true);
+
         $this->render('edit', array(
             'model' => $model,
             'partsAll' => $partsAll,
