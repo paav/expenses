@@ -301,17 +301,22 @@ class ExpenseController extends Controller
                     if ($timestamp) {
                         $searchString = yii::app()->dateFormatter->format(
                             $dbDatePatterns[$index], $timestamp);
-                        l($searchString);
 
                         break;
                     }
                 }
 
-                $criteria->compare('date', $searchString, true, 'OR'); 
-                $criteria->compare('expenseType.name', $searchString, true, 'OR'); 
-                $criteria->compare('part.name', $searchString, true, 'OR'); 
-                $criteria->compare('partType.name', $searchString, true, 'OR'); 
-                $criteria->compare('job.name', $searchString, true, 'OR'); 
+                $searchCriteria = new CDbCriteria();
+                $searchCriteria->compare('date', $searchString, true, 'OR'); 
+                $searchCriteria->compare('expenseType.name', $searchString,
+                                         true, 'OR'); 
+                $searchCriteria->compare('part.name', $searchString, true,
+                                         'OR'); 
+                $searchCriteria->compare('partType.name', $searchString, true,
+                                         'OR'); 
+                $searchCriteria->compare('job.name', $searchString, true, 'OR'); 
+
+                $criteria->mergeWith($searchCriteria);
             }
         }
 
