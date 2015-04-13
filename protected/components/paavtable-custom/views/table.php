@@ -28,14 +28,13 @@
     <?php foreach ($models as $model): ?>
     <tr>
       <td><?php
-        l(CHtml::resolveValue($data->model,'contractor_id'));
         echo CHtml::activeRadioButton($data->model,'contractor_id',array(
           'uncheckValue'=>null,
           'value'=>$model->id));
       ?>
 
-      <?php foreach ($attrLabels as $name => $label): ?>
-      <td><?php echo $model[$name]; ?>
+      <?php foreach ($attrLabels as $attr => $label): ?>
+      <td><?php echo CHtml::value($model, $attr, 'error'); ?>
       <?php endforeach; ?>
 
       <td class="table-cell-cmd">

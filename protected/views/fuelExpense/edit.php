@@ -4,7 +4,6 @@
 /* @var $this FuelExpenseController */
 /* @var $model FuelExpense */
 /* @var $fuelsAll Array */
-/* @var $contractorsDp CActiveDataProvider */
 /* @var $form CActiveForm */
 /* @var $df CDateFormatter */
 ?>
@@ -51,12 +50,12 @@
       <?php echo $form->error($model, 'contractor_id'); ?>
 
       <?php
-        $this->widget('ext.paavtable.PaavTable', array(
-          'dataProvider'=>$contractorsDp,
-          'columns'=>array('name','address','note'),
-          'view'=>'components.paavtable-custom.views.table',
-          'data'=>array('model'=>$model),
-        ));
+        $this->widget('components.contractor-paavtable.ContractorPaavTable',
+          array(
+            'contractorType'=>Contractor::TYPE_STATION,
+            'data'=>array('model'=>$model)
+          )
+        );
       ?>
 
       <a href="<?php

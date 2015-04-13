@@ -59,6 +59,8 @@ class Contractor extends PaavActiveRecord
 		return array(
 			'expenses' => array(self::HAS_MANY, 'Expense', 'contractor_id'),
             'type' => array(self::BELONGS_TO, 'ContractorType', 'type_id'),
+            'addressr' => array(self::BELONGS_TO, 'Address', 'address_id'),
+            'head' => array(self::BELONGS_TO, 'ContractorHead', 'head_id'),
 		);
 	}
 

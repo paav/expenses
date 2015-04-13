@@ -171,23 +171,6 @@ class FuelExpenseController extends Controller
 
         $fuelsAll = Fuel::model()->findAll(array('order' => 'name')); 
 
-        $contractorsDp = new CActiveDataProvider('Contractor', array(
-            'criteria' => array(
-                'condition' => 'type_id=?',
-                'params' => array(Contractor::TYPE_STATION),
-            ),
-            'sort' => array(
-                'attributes' => array('name', 'address'),
-                'defaultOrder' => array('name' => CSort::SORT_ASC)
-            )
-        ));
-
-        $pages = new CPagination($contractorsDp->totalItemCount);
-        $pages->pageSize = 8;
-        $pages->applyLimit($contractorsDp->criteria);
-
-        $contractorsDp->pagination = $pages;
-
         $df = yii::app()->dateFormatter;
 
         $model->formatForView(true);
@@ -196,7 +179,6 @@ class FuelExpenseController extends Controller
             'model'=>$model,
             'fuelsAll'=>$fuelsAll,
             'df'=> $df,
-            'contractorsDp' => $contractorsDp,
         ));
     }
 }

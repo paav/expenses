@@ -4,7 +4,6 @@
 /* @var $this PartExpenseController */
 /* @var $model PartExpense */
 /* @var $partsAll Array */
-/* @var $contractorsDp CActiveDataProvider */
 /* @var $form CActiveForm */
 /* @var $df CDateFormatter */
 ?>
@@ -23,7 +22,9 @@
 <div class="row">
   <div class="col-md-5">
     <div class="form-group">
-      <?php echo $form->labelEx($model, 'date', array('class'=>'control-label')); ?>
+      <?php
+        echo $form->labelEx($model, 'date', array('class'=>'control-label'));
+      ?>
       <?php echo $form->textField($model, 'date', array(
           'class'=>'form-control datesetter',
           'value'=>$df->format('dd.MM.yyyy', $model->date),
@@ -50,12 +51,12 @@
       <?php echo $form->error($model, 'contractor_id'); ?>
 
       <?php
-        $this->widget('ext.paavtable.PaavTable', array(
-          'dataProvider'=>$contractorsDp,
-          'columns'=>array('name','address','note'),
-          'view'=>'components.paavtable-custom.views.table',
-          'data'=>array('model'=>$model),
-        ));
+        $this->widget('components.contractor-paavtable.ContractorPaavTable',
+          array(
+            'contractorType'=>Contractor::TYPE_STORE,
+            'data'=>array('model'=>$model)
+          )
+        );
       ?>
 
       <a href="<?php

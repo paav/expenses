@@ -193,22 +193,6 @@ class JobExpenseController extends Controller
         $partsAll = Part::model()->findAll(array('order' => 'name')); 
         $jobsAll = Job::model()->findAll(array('order' => 'name')); 
 
-        $contractorsDp = new CActiveDataProvider('Contractor', array(
-            'criteria' => array(
-                'condition' => 'type_id=?',
-                'params' => array(Contractor::TYPE_GARAGE),
-            ),
-            'sort' => array(
-                'attributes' => array('name', 'address'),
-                'defaultOrder' => array('name' => CSort::SORT_ASC)
-            )
-        ));
-
-        $pages = new CPagination($contractorsDp->totalItemCount);
-        $pages->pageSize = 8;
-        $pages->applyLimit($contractorsDp->criteria);
-
-        $contractorsDp->pagination = $pages;
         $boundToModelExpenses = Expense::model()->findAll('bound_id=:id', array(
             ':id'=> $model->id,
         ));
@@ -224,7 +208,6 @@ class JobExpenseController extends Controller
             'model' => $model,
             'partsAll' => $partsAll,
             'jobsAll' => $jobsAll,
-            'contractorsDp' => $contractorsDp,
             'boundToModelExpenses' => $boundToModelExpenses,
             'boundToNothingExpenses' => $boundToNothingExpenses,
             'df'=> $df,
