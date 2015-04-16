@@ -2,6 +2,7 @@ assets/
 protected/runtime/
 protected/data/*.db
 vendor/*
+node_modules/
 !vendor/calendar/
 !vendor/pdate/
 !vendor/lib/
