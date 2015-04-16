@@ -107,7 +107,7 @@ class FuelExpense extends Expense
     protected function afterFind()
     {
         $this->cost = $this->quantity * $this->unit_price;
-        $this->descr = $this->contractor->name . ' ' . $this->fuel->name;   
+        $this->descr = $this->contractor->head->name . ' ' . $this->fuel->name;   
 
         return parent::afterFind();
     }

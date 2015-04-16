@@ -30,11 +30,11 @@ class Address extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('line1', 'required'),
+			array('line1, line2', 'required'),
 			array('line1, line2, line3', 'length', 'max'=>255),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('id, line1, line2, line3', 'safe', 'on'=>'search'),
+			array('line1, line2', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -57,9 +57,9 @@ class Address extends CActiveRecord
 	{
 		return array(
 			'id' => 'ID',
-			'line1' => 'Адрес',
-			'line2' => 'Line2',
-			'line3' => 'Line3',
+			'line1' => 'Улица/проспект',
+			'line2' => 'Дом/строение',
+			'line3' => 'Офис',
 		);
 	}
 

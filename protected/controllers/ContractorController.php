@@ -56,35 +56,15 @@ class ContractorController extends Controller
 	 */
 	public function actionCreate($id = Contractor::TYPE_STORE)
 	{
-        l($id);
         if (!ContractorType::model()->findByPk($id))
             throw new CHttpException(404, 'The requested contractor type does not exist.');
 
         $model=new Contractor();
         $model->type_id = $id; 
 
-		// Uncomment the following line if AJAX validation is needed
-		// $this->performAjaxValidation($model);
+        $address = new Address();
 
-		if(isset($_POST['Contractor']))
-		{
-			$model->attributes=$_POST['Contractor'];
-
-			if($model->save())
-				$this->redirect(array('view','id'=>$model->id));
-		}
-
-        $contractorDp = new CActiveDataProvider('Contractor', array(
-            'criteria' => array(
-                'condition' => 'type_id=:type',
-                'params' => array(':type' => $id),
-            )
-        ));
-
-		$this->render('create',array(
-			'model'=>$model,
-            'contractorDp'=>$contractorDp,
-		));
+        $this->handleRequest($model, $address);
 	}
 
 	/**
@@ -96,19 +76,15 @@ class ContractorController extends Controller
 	{
 		$model=$this->loadModel($id);
 
+        if (!isset($model->addressr) || !($model->addressr instanceof Address))
+            throw new CHttpException(500, "Model's address relation property doesn't contain Address object");
+
+        $address = $model->addressr;
+
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
 
-		if(isset($_POST['Contractor']))
-		{
-			$model->attributes=$_POST['Contractor'];
-			if($model->save())
-				$this->redirect(array('view','id'=>$model->id));
-		}
-
-		$this->render('update',array(
-			'model'=>$model,
-		));
+        $this->handleRequest($model, $address);
 	}
 
 	/**
@@ -160,7 +136,10 @@ class ContractorController extends Controller
 	 */
 	public function loadModel($id)
 	{
-		$model=Contractor::model()->findByPk($id);
+        $model=Contractor::model()->findByPk($id, array(
+            'with' => array('head', 'addressr')
+        ));
+
 		if($model===null)
 			throw new CHttpException(404,'The requested page does not exist.');
 		return $model;
@@ -178,4 +157,49 @@ class ContractorController extends Controller
 			Yii::app()->end();
 		}
 	}
+
+    protected function handleRequest($model, $address)
+    {
+		if(isset($_POST['Contractor'], $_POST['Address'])) {
+			$model->attributes = $_POST['Contractor'];
+			$address->attributes = $_POST['Address'];
+
+            $model->validate();
+            $address->validate();
+
+            if (!$model->hasErrors() && !$address->hasErrors()) {
+                $trans = Yii::app()->db->beginTransaction();
+        
+                try {
+                    $address->save(false);
+
+                    $model->address_id = $address->id;
+                    $model->save(false);
+
+                    $trans->commit();
+                } catch (Exception $e) { 
+                    $trans->rollback();
+
+                    throw new CHttpException(500, $e->errorMessage);
+                }
+
+                $this->redirect(array('view','id'=>$model->id));
+            }
+		}
+
+        $heads = ContractorHead::model()->findAll(array(
+            'order' => 'name'
+        )); 
+
+        $types = ContractorType::model()->findAll();
+
+		$this->render('edit',array(
+			'model'   => $model,
+            'heads'   => $heads,
+            'types'   => $types,
+            'address' => $address,
+		));
+      
+    }
+     
 }

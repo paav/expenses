@@ -9,9 +9,8 @@
 	'data'=>$model,
     'cssFile'=>yii::app()->baseUrl.'/css/detail.css',
 	'attributes'=>array(
-		'name',
-//        'city',
-		'address',
+		'head.name',
+		'addressr.line1',
 		'note',
 	),
 )); ?>

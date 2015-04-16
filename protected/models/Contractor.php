@@ -38,14 +38,12 @@ class Contractor extends PaavActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-            array('type_id, name', 'required'),
-			array('type_id', 'numerical', 'integerOnly'=>true),
-			array('name, city', 'length', 'max'=>30),
-            array('address', 'length', 'max'=>50),
+            array('head_id,type_id', 'required'),
+            array('head_id,type_id', 'numerical', 'integerOnly'=>true),
 			array('note', 'length', 'max'=>240),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('name, city, address, note', 'safe', 'on'=>'search'),
+			array('note', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -89,8 +87,10 @@ class Contractor extends PaavActiveRecord
 
 		return array(
 			'name' => $name,
+            'head_id' => 'Наименование',
+            'type_id' => 'Тип',
 			'city' => 'Город',
-			'address' => 'Адрес',
+			'address_id' => 'Адрес',
 			'note' => 'Комментарий',
 		);
 	}

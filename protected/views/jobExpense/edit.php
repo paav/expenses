@@ -108,8 +108,8 @@
           <td><?php echo CHtml::checkbox('idsToUnbind[]', false, array(
                       'value'=>$expense->id)); ?>
           <td><?php echo $df->format('dd.MM.yyyy', $expense->date); ?>
-          <td><?php echo $expense->contractor->name . ', ' .
-                         $expense->contractor->address; ?>
+          <td><?php echo $expense->contractor->head->name . ', ' .
+              $expense->contractor->addressr->line1; ?>
           <td><?php echo $expense->part->type->name . ' ' .
                          $expense->part->manufacturer . ' ' .
                          $expense->part->name . ' ' .
@@ -139,8 +139,8 @@
           <td><?php echo CHtml::checkbox('idsToBind[]', false, array(
                       'value'=>$expense->id)); ?>
           <td><?php echo $df->format('dd.MM.yyyy', $expense->date); ?>
-          <td><?php echo $expense->contractor->name . ', ' .
-                         $expense->contractor->address;
+          <td><?php echo $expense->contractor->head->name . ', ' .
+            $expense->contractor->addressr->line1;
               ?>
           <td><?php echo $expense->part->type->name . ' ' .
                          $expense->part->manufacturer . ' ' .

@@ -14,7 +14,7 @@ $this->widget('zii.widgets.CDetailView', array(
     'date:date',
     array(
       'label'=>'Заправка',
-      'value'=>"{$model->contractor->name}, {$model->contractor->address}",
+      'value'=>"{$model->contractor->head->name}, {$model->contractor->addressr->line1}",
     ),
     array(
       'label'=>'Марка',

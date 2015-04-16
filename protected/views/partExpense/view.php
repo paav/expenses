@@ -13,7 +13,7 @@
     'date:date',
     array(
       'label'=>'Магазин',
-      'value'=>"{$model->contractor->name}, {$model->contractor->address}",
+      'value'=>"{$model->contractor->head->name}, {$model->contractor->addressr->line1}",
     ),
     array(
       'label'=>'З/часть (расх. мат)',
@@ -35,7 +35,7 @@
     'date:date',
     array(
       'header'=>'Мастерская',
-      'value'=>'$data->contractor->name.", ".$data->contractor->address',
+      'value'=>'$data->contractor->head->name.", ".$data->contractor->addressr->line1',
     ),
     'job.name',
     'cost:price',
