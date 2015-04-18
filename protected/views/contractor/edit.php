@@ -4,10 +4,26 @@
 /* @var $this ContractorController */
 /* @var $model Contractor */
 /* @var $form CActiveForm */
-/* @var $heads array of ContractorHeads */
+/* @var $heads array of ContractorHead */
+/* @var $newHead ContractorHead */
+/* @var $types array of ContractorType */
 /* @var $address Address */
 ?>
-<p>Страница добавления контрагента</p>
+<h1><?php
+  echo $model->filterPageHeading(array(
+    'new'=>array(
+      'Новый магазин',
+      'Новая мастерска',
+      'Новая заправка',
+    ),
+    'edit'=>array(
+      'Редактирование магазина',
+      'Редактирование мастерской',
+      'Редактирование заправки',
+    )
+  ));
+?></h1>
+
 <div class="form">
 
 <?php $form=$this->beginWidget('CActiveForm', array(
@@ -18,20 +34,37 @@
   // See class documentation of CActiveForm for details on this.
   'enableAjaxValidation'=>false,
 )); ?>
-  <?php echo $form->hiddenField($model,'type_id'); ?>
 
   <div class="row">
-    <div class="form-group">
-      <?php echo $form->labelEx($model,'head_id', array('class'=>'control-label')); ?>
+    <div class="col-md-6">
+      <div class="form-group">
+        <?php echo $form->labelEx($model,'head_id', array('class'=>'control-label')); ?>
+        <?php
+          echo $form->dropDownList($model, 'head_id', CHtml::listData(
+            $heads, 'id', 'name'), array('size'=>'10','class'=>'form-control')
+          );
+        ?>
+        <?php echo $form->error($model,'head_id'); ?>
+      </div>
+    </div>
+    <div class="col-md-6">
       <?php
-        echo $form->dropDownList($model, 'head_id', CHtml::listData(
-          $heads, 'id', 'name'), array('size'=>'10','class'=>'form-control')
-        );
+        $this->renderPartial('/contractorHead/_form-fields', array(
+          'model'=>$newHead,
+          'form'=>$form
+        ));
       ?>
-      <?php echo $form->error($model,'head_id'); ?>
+
+      <div class="form-group">
+        <?php
+          echo CHtml::submitButton('Добавить', array('name'=>'addHead',
+            'class'=>'btn btn-default'));
+        ?>
+      </div>
     </div>
   </div>
 
+  <?php if (!empty($types)): ?>
   <div class="row">
     <div class="form-group">
       <?php echo $form->labelEx($model,'type_id', array('class'=>'control-label')); ?>
@@ -43,6 +76,7 @@
       <?php echo $form->error($model,'type_id'); ?>
     </div>
   </div>
+  <?php endif; ?>
 
   <fieldset>
     <legend><?php echo $model->getAttributeLabel('address_id'); ?></legend>

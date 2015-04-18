@@ -87,7 +87,7 @@ class Contractor extends PaavActiveRecord
 
 		return array(
 			'name' => $name,
-            'head_id' => 'Наименование',
+            'head_id' => 'Название',
             'type_id' => 'Тип',
 			'city' => 'Город',
 			'address_id' => 'Адрес',
@@ -146,5 +146,15 @@ class Contractor extends PaavActiveRecord
         )); 
         
         return $this;
+    }
+
+    public function filterPageHeading($headings)
+    {
+        if ($this->type_id === null)
+            return false;
+
+        $action = $this->isNewRecord ? 'new' : 'edit';
+        
+        return $headings[$action][$this->type_id - 1];
     }
 }

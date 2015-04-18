@@ -54,9 +54,9 @@ class ContractorController extends Controller
 	 * Creates a new model.
 	 * If creation is successful, the browser will be redirected to the 'view' page.
 	 */
-	public function actionCreate($id = Contractor::TYPE_STORE)
+	public function actionCreate($id = null)
 	{
-        if (!ContractorType::model()->findByPk($id))
+        if ($id !== null && !ContractorType::model()->findByPk($id))
             throw new CHttpException(404, 'The requested contractor type does not exist.');
 
         $model=new Contractor();
@@ -160,7 +160,15 @@ class ContractorController extends Controller
 
     protected function handleRequest($model, $address)
     {
-		if(isset($_POST['Contractor'], $_POST['Address'])) {
+        $newHead = new ContractorHead('nested');
+
+        if (isset($_POST['addHead']) && $_POST['ContractorHead']) {
+            $newHead->attributes = $_POST['ContractorHead'];
+
+            $newHead->save();
+        }
+
+		if (isset($_POST['Contractor'], $_POST['Address'])) {
 			$model->attributes = $_POST['Contractor'];
 			$address->attributes = $_POST['Address'];
 
@@ -188,14 +196,22 @@ class ContractorController extends Controller
 		}
 
         $heads = ContractorHead::model()->findAll(array(
-            'order' => 'name'
+            'order'     => 't.name',
+            'distinct'  => true,
+            'join'      => 'LEFT OUTER JOIN contractor ON t.id = head_id',
+            'condition' => 'type_id=:id OR type_id is NULL',
+            'params'    => array(':id' => $model->type_id)
         )); 
 
-        $types = ContractorType::model()->findAll();
+        if (is_null($model->type_id))
+            $types = ContractorType::model()->findAll();
+        else
+            $types = array();
 
 		$this->render('edit',array(
 			'model'   => $model,
             'heads'   => $heads,
+            'newHead' => $newHead,
             'types'   => $types,
             'address' => $address,
 		));
