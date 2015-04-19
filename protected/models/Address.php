@@ -60,6 +60,7 @@ class Address extends CActiveRecord
 			'line1' => 'Улица/проспект',
 			'line2' => 'Дом/строение',
 			'line3' => 'Офис',
+            'fullAddress' => 'Адрес'
 		);
 	}
 
@@ -101,4 +102,10 @@ class Address extends CActiveRecord
 	{
 		return parent::model($className);
 	}
+
+    public function getFullAddress()
+    {
+       return $this->line1 . ' ' . $this->line2; 
+    }
+    
 }

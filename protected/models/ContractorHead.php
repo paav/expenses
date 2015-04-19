@@ -56,7 +56,7 @@ class ContractorHead extends CActiveRecord
 		return array(
 			'id' => 'ID',
             'name' => !$this->scenario == 'nested' ? 'Название'
-                                                   : 'Новое название',
+                                                   : 'Новый владелец',
 		);
 	}
 

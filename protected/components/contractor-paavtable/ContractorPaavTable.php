@@ -11,8 +11,8 @@ class ContractorPaavTable extends PaavTable
             throw new CException(
                 'You must provide `ContractorType` property initial value');
 
-        $this->columns = array('head.name','addressr.line1','note');
-        $this->view = 'components.paavtable-custom.views.table';
+        $this->columns = array('head.name','addressr.fullAddress','note');
+        $this->view = 'components.contractor-paavtable.views.table';
 
         $this->dataProvider = new CActiveDataProvider('Contractor', array(
             'criteria' => array(

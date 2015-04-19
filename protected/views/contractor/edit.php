@@ -13,7 +13,7 @@
   echo $model->filterPageHeading(array(
     'new'=>array(
       'Новый магазин',
-      'Новая мастерска',
+      'Новая мастерская',
       'Новая заправка',
     ),
     'edit'=>array(
@@ -37,17 +37,46 @@
 
   <div class="row">
     <div class="col-md-6">
-      <div class="form-group">
-        <?php echo $form->labelEx($model,'head_id', array('class'=>'control-label')); ?>
+      <fieldset>
+        <legend><?php echo $model->getAttributeLabel('address_id'); ?></legend>
         <?php
-          echo $form->dropDownList($model, 'head_id', CHtml::listData(
-            $heads, 'id', 'name'), array('size'=>'10','class'=>'form-control')
-          );
+          $this->renderPartial('/address/_form-fields', array(
+            'model'=>$address,
+            'form'=>$form
+          ));
         ?>
-        <?php echo $form->error($model,'head_id'); ?>
+      </fieldset>
+      <div class="row">
+        <div class="form-group">
+          <?php
+            echo $form->labelEx($model, 'note', array('class'=>'control-label'));
+          ?>
+          <?php
+            echo $form->textArea($model, 'note', array(
+              'class'=>'form-control', 'maxlength'=>240,
+              'placeholder'=>'Приятный персонал'
+            ));
+          ?>
+          <?php echo $form->error($model,'note'); ?>
+        </div>
       </div>
     </div>
     <div class="col-md-6">
+      <div class="form-group">
+        <?php echo $form->labelEx($model,'head_id', array('class'=>'control-label')); ?>
+        <?php echo $form->error($model,'head_id'); ?>
+
+      <?php
+        $this->widget('ext.paavtable.PaavTable', array(
+          'dataProvider'=>$headsDp,
+          'view'=>'components.paavtable-custom.views.table-heads',
+          'data'=>array('model'=>$model),
+          'columns'=>array('name')
+        ));
+      ?>
+
+      </div>
+
       <?php
         $this->renderPartial('/contractorHead/_form-fields', array(
           'model'=>$newHead,
@@ -77,33 +106,6 @@
     </div>
   </div>
   <?php endif; ?>
-
-  <fieldset>
-    <legend><?php echo $model->getAttributeLabel('address_id'); ?></legend>
-
-    <?php
-      $this->renderPartial('/address/_form-fields', array(
-        'model'=>$address,
-        'form'=>$form
-      ));
-    ?>
-
-  </fieldset>
-
-  <div class="row">
-    <div class="form-group">
-      <?php
-        echo $form->labelEx($model, 'note', array('class'=>'control-label'));
-      ?>
-      <?php
-        echo $form->textArea($model, 'note', array(
-          'class'=>'form-control', 'maxlength'=>240,
-          'placeholder'=>'Приятный персонал'
-        ));
-      ?>
-      <?php echo $form->error($model,'note'); ?>
-    </div>
-  </div>
 
   <div class="form-group">
     <?php

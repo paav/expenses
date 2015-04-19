@@ -164,11 +164,9 @@ class ContractorController extends Controller
 
         if (isset($_POST['addHead']) && $_POST['ContractorHead']) {
             $newHead->attributes = $_POST['ContractorHead'];
-
             $newHead->save();
-        }
 
-		if (isset($_POST['Contractor'], $_POST['Address'])) {
+        } elseif (isset($_POST['Contractor'], $_POST['Address'])) {
 			$model->attributes = $_POST['Contractor'];
 			$address->attributes = $_POST['Address'];
 
@@ -195,12 +193,17 @@ class ContractorController extends Controller
             }
 		}
 
-        $heads = ContractorHead::model()->findAll(array(
-            'order'     => 't.name',
-            'distinct'  => true,
-            'join'      => 'LEFT OUTER JOIN contractor ON t.id = head_id',
-            'condition' => 'type_id=:id OR type_id is NULL',
-            'params'    => array(':id' => $model->type_id)
+        $headsDp = new CActiveDataProvider('ContractorHead', array(
+            'criteria' => array(
+                'order'     => 't.name',
+                'distinct'  => true,
+                'join'      => 'LEFT OUTER JOIN contractor ON t.id = head_id',
+                'condition' => 'type_id=:id OR type_id is NULL',
+                'params'    => array(':id' => $model->type_id)
+            ),
+            'pagination' => array(
+                'pageSize' => 10
+            )
         )); 
 
         if (is_null($model->type_id))
@@ -210,7 +213,7 @@ class ContractorController extends Controller
 
 		$this->render('edit',array(
 			'model'   => $model,
-            'heads'   => $heads,
+            'headsDp' => $headsDp,
             'newHead' => $newHead,
             'types'   => $types,
             'address' => $address,

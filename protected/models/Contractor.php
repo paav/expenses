@@ -87,7 +87,7 @@ class Contractor extends PaavActiveRecord
 
 		return array(
 			'name' => $name,
-            'head_id' => 'Название',
+            'head_id' => 'Владелец',
             'type_id' => 'Тип',
 			'city' => 'Город',
 			'address_id' => 'Адрес',
