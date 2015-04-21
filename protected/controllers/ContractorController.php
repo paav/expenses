@@ -189,9 +189,16 @@ class ContractorController extends Controller
                     throw new CHttpException(500, $e->errorMessage);
                 }
 
-                $this->redirect(array('view','id'=>$model->id));
+                $this->redirect(Yii::app()->user->returnUrl);
             }
 		}
+
+        $request = Yii::app()->request;
+        $prevUrl = $request->urlReferrer;
+        $currentUrl = $request->hostInfo . $request->url;
+
+        if ($currentUrl !== $prevUrl)
+            Yii::app()->user->returnUrl = $prevUrl;
 
         $headsDp = new CActiveDataProvider('ContractorHead', array(
             'criteria' => array(
