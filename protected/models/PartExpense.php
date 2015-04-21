@@ -50,6 +50,7 @@ class PartExpense extends Expense
             'quantity' => 'Количество',
             'unit_price' => 'Цена за ед.',
 			'note' => 'Примечание',
+            'part_id'=>'Запчасть'
 		);
 	}
 

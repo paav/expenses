@@ -4,6 +4,7 @@
 /* @var $this PartExpenseController */
 /* @var $model PartExpense */
 /* @var $partsAll Array */
+/* @var $partsDp CActiveDataProvider */
 /* @var $form CActiveForm */
 /* @var $df CDateFormatter */
 ?>
@@ -20,7 +21,7 @@
   'enableAjaxValidation' => false,
 )); ?>
 <div class="row">
-  <div class="col-md-5">
+  <div class="col-md-3">
     <div class="form-group">
       <?php
         echo $form->labelEx($model, 'date', array('class'=>'control-label'));
@@ -31,21 +32,28 @@
         ));
       ?>
     </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-12">
     <div class="form-group">
       <?php echo $form->labelEx($model, 'part_id'); ?>
       <?php echo $form->error($model, 'part_id'); ?>
+
       <?php
-        echo $form->dropDownList(
-          $model, 'part_id',
-          CHtml::listData($partsAll, 'id', 'descr'),
-          array('size'=>'10','class'=>'form-control')
-        );
+        $this->widget('ext.paavtable.PaavTable', array(
+          'dataProvider'=>$partsDp,
+          'view'=>'components.paavtable-custom.views.table-parts',
+          'data'=>array('model'=>$model),
+          'columns'=>array('type.name', 'manufacturer', 'name', 'part_number')
+        ));
       ?>
+
+      <a href="<?php echo $this->createAbsoluteUrl('part/create');
+        ?>">Добавить запчасть</a>
     </div>
-    <p><a href="<?php echo $this->createAbsoluteUrl('part/create');
-      ?>">Добавить запчасть</a></p>
-  </div>
-  <div class="col-md-7">
+
     <div class="form-group">
       <?php echo $form->labelEx($model, 'contractor_id'); ?>
       <?php echo $form->error($model, 'contractor_id'); ?>
@@ -67,6 +75,7 @@
     </div>
   </div>
 </div>
+
 <div class="row">
   <div class="col-md-5">
     <div class="form-group">

@@ -185,6 +185,16 @@ class PartExpenseController extends Controller
         usort($partsAll, function($a, $b) {
             return strcmp($a->descr, $b->descr);
         });
+        $partsDp = new CActiveDataProvider('Part', array(
+            'criteria' => array(
+                'order' => 'type.name',
+                'with' => 'type'
+            ),
+            'pagination' => array(
+                'pageSize' => 6
+            )
+        )); 
+
 
         $jobsAll = Job::model()->findAll(array('order' => 'name')); 
 
@@ -193,9 +203,10 @@ class PartExpenseController extends Controller
         $model->formatForView(true);
 
         $this->render('edit',array(
-            'model'=>$model,
-            'partsAll'=>$partsAll,
-            'df'=> $df,
+            'model'    => $model,
+            'partsAll' => $partsAll,
+            'df'       => $df,
+            'partsDp'  => $partsDp
         ));
     }
 }
