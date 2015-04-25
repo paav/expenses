@@ -6,3 +6,5 @@ node_modules/
 !vendor/calendar/
 !vendor/pdate/
 !vendor/lib/
+*.swo
+*.swp
