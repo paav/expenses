@@ -70,8 +70,11 @@ class PartTypeController extends Controller
 				$this->redirect(array('view','id'=>$model->id));
 		}
 
+        $parents = PartType::model()->findAll();
+
 		$this->render('create',array(
 			'model'=>$model,
+            'parents'=>$parents
 		));
 	}
 
@@ -94,8 +97,11 @@ class PartTypeController extends Controller
 				$this->redirect(array('view','id'=>$model->id));
 		}
 
-		$this->render('update',array(
+        $parents = PartType::model()->findAll();
+
+		$this->render('create',array(
 			'model'=>$model,
+            'parents'=>$parents
 		));
 	}
 

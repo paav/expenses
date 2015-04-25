@@ -29,6 +29,8 @@ class PartType extends PaavActiveRecord
 		// will receive user inputs.
 		return array(
 			array('name', 'length', 'max'=>50),
+			array('name', 'required'),
+            array('parent_id', 'numerical', 'integerOnly'=>true),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
 			array('id, name', 'safe', 'on'=>'search'),
