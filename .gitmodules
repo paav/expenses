@@ -12,3 +12,6 @@
 [submodule "protected/extensions/paavtable"]
 	path = protected/extensions/paavtable
 	url = git@github.com:paav/paavtable.git
+[submodule "protected/components/paavtreeview"]
+	path = protected/components/paavtreeview
+	url = git@github.com:paav/paavtreeview.git
