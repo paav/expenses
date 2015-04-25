@@ -33,10 +33,9 @@ class Part extends PaavActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-            array('part_type_id, name', 'required'),
-            array('part_type_id', 'numerical', 'integerOnly'=>true, 'min'=>0, 'max'=>500),
-			array('name', 'length', 'max'=>255),
-			array('manufacturer, part_number', 'length', 'max'=>50),
+            array('part_type_id, vendor_id', 'required'),
+            array('part_type_id, vendor_id', 'numerical', 'integerOnly'=>true,
+                  'min'=>0),
 			array('note', 'length', 'max'=>500),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
@@ -53,7 +52,8 @@ class Part extends PaavActiveRecord
 		// class name for the relations automatically generated below.
 		return array(
 			'expenses' => array(self::HAS_MANY, 'PartExpense', 'part_id'),
-            'type' => array(self::BELONGS_TO, 'PartType', 'part_type_id'),
+            'type'     => array(self::BELONGS_TO, 'PartType', 'part_type_id'),
+            'vendor'   => array(self::BELONGS_TO, 'Vendor', 'vendor_id'),
 		);
 	}
 
@@ -65,7 +65,7 @@ class Part extends PaavActiveRecord
 		return array(
             'part_type_id' => 'Тип',
 			'name' => 'Наименование',
-			'manufacturer' => 'Производитель',
+            'vendor_id'    => 'Производитель',
 			'part_number' => 'Артикул',
 			'note' => 'Комментарий',
 		);
