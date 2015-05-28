@@ -40,19 +40,19 @@
       <td class="table-cell-cmd">
 
         <a href="<?php
-          echo $this->getAbsUrlByModel($model, 'view', array(
+          echo $this->app->createAbsoluteUrl('part/view', array(
             'id'=>$model->id
           ));
         ?>"><i class="fa fa-search fa-lg hover-scale"></i></a>
 
         <a href="<?php
-          echo $this->getAbsUrlByModel($model, 'update', array(
+          echo $this->app->createAbsoluteUrl('part/update', array(
             'id'=>$model->id
           ));
         ?>"><i class="fa fa-edit fa-lg hover-scale"></i></a>
 
         <a href="<?php
-          echo $this->getAbsUrlByModel($model, 'delete', array(
+          echo $this->app->createAbsoluteUrl('part/delete', array(
             'id'=>$model->id
           ));
         ?>"><i class="fa fa-remove fa-lg hover-scale"></i></a>
