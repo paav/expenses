@@ -58,24 +58,8 @@ class PartController extends Controller
 	 */
 	public function actionCreate()
 	{
-		$model=new Part;
-
-		// Uncomment the following line if AJAX validation is needed
-		// $this->performAjaxValidation($model);
-
-		if(isset($_POST['Part']))
-		{
-			$model->attributes=$_POST['Part'];
-			if($model->save())
-				$this->redirect(array('view','id'=>$model->id));
-		}
-
-        $partTypes = PartType::model()->findAll();
-
-		$this->render('create',array(
-			'model'=>$model,
-            'partTypes'=>$partTypes,
-		));
+		$model = new Part();
+        $this->handleRequest($model);
 	}
 
 	/**
@@ -85,25 +69,54 @@ class PartController extends Controller
 	 */
 	public function actionUpdate($id)
 	{
-		$model=$this->loadModel($id);
-
-		// Uncomment the following line if AJAX validation is needed
-		// $this->performAjaxValidation($model);
-
-		if(isset($_POST['Part']))
-		{
-			$model->attributes=$_POST['Part'];
-			if($model->save())
-				$this->redirect(array('view','id'=>$model->id));
-		}
-
-        $partTypes = PartType::model()->findAll();
-
-		$this->render('update',array(
-			'model'=>$model,
-            'partTypes'=>$partTypes,
-		));
+		$model=Part::model()->findByPk($id);
+        $this->handleRequest($model);
 	}
+
+    /**
+     *
+     * @param
+     */
+    protected function handleRequest($model)
+    {
+        if (isset($_GET['ptvi_id'])) {
+            $class = Part::getSubclass($_GET['ptvi_id']); 
+            $model = new $class();
+        }
+            
+        $modelClass = get_class($model);
+
+        if (isset($_POST[$modelClass])) {
+            $model->attributes = $_POST[$modelClass];
+
+            if ($model->save())
+                $this->redirect(array('partExpense/create'));
+        }
+
+        $rootTypes = PartType::model()->findAll('parent_id is NULL');
+
+        $typesDp = new CActiveDataProvider('PartType', array(
+            'pagination' => false)); 
+
+        $vendors = Vendor::model()->findAll(array(
+            'order' => 'name'));
+
+        if (isset($rootType))
+            $types = PartType::model()->findAll('parent_id=?', array($rootType->id));
+        else {
+           $rootType = new PartType(); 
+           $types = array();
+        }
+
+		$this->render('create',array(
+			'model'     => $model,
+            'rootTypes' => $rootTypes,
+            'rootType'  => $rootType,
+            'types'     => $types,
+            'vendors'   => $vendors,
+            'typesDp'   => $typesDp,
+		));
+    }
 
 	/**
 	 * Deletes a particular model.

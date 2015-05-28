@@ -173,6 +173,17 @@ class Part extends PaavActiveRecord
         return false;
     }
 
+
+    /**
+     *
+     * @return
+     */
+    public static function getSubclass($typeId)
+    {
+        $superType = self::findSuperType($typeId); 
+
+        return self::$subclasses[$superType ?: 0];
+    }
 }
 
 class GenericPart extends Part
