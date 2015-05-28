@@ -15,7 +15,7 @@
  */
 class Part extends PaavActiveRecord
 {
-    public $descr = '';
+
     const TYPE_GENERIC   = 13;
     const TYPE_MOTOR_OIL = 2;
     const TYPE_FLUID     = 12;
@@ -144,20 +144,6 @@ class Part extends PaavActiveRecord
 		return parent::model($className);
 	}
 
-    protected function afterFind()
-    {
-        $descrParts = [
-            $this->type->name,
-            $this->manufacturer,
-            $this->name,
-            $this->part_number,
-        ];
-
-        $this->descr = implode(' ', $descrParts);   
-
-        return parent::afterFind();
-    }
-
     /**
      *
      * @return
@@ -171,6 +157,15 @@ class Part extends PaavActiveRecord
                 return $type;
 
         return false;
+    }
+
+    /**
+     *
+     * @return
+     */
+    public function getDescr()
+    {
+        return $this->name; 
     }
 
     /**

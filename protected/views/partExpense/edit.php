@@ -46,7 +46,7 @@
           'dataProvider'=>$partsDp,
           'view'=>'components.paavtable-custom.views.table-parts',
           'data'=>array('model'=>$model),
-          'columns'=>array('type.name', 'vendor.name', 'name', 'part_number')
+          'columns'=>array('type.name', 'vendor.name', 'descr', 'part_number')
         ));
       ?>
 
