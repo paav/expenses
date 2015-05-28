@@ -16,6 +16,39 @@
 class Part extends PaavActiveRecord
 {
     public $descr = '';
+    const TYPE_GENERIC   = 13;
+    const TYPE_MOTOR_OIL = 2;
+    const TYPE_FLUID     = 12;
+    const TYPE_ACCESSORY = 9;
+    const NOVENDOR = -1;
+
+    // public $descr = '';
+
+
+    protected static $subclasses = array(
+        self::TYPE_GENERIC   => 'GenericPart',
+        self::TYPE_MOTOR_OIL => 'MotorOil',
+        self::TYPE_FLUID     => 'Fluid',
+        self::TYPE_ACCESSORY => 'Accessory',
+    );
+
+    protected $superType = null;
+
+    /**
+     * @param array $attributes
+     * @return Car
+     */
+    protected function instantiate($attributes)
+    {
+        $superType = self::findSuperType($attributes['part_type_id']);
+        $subclass = self::$subclasses[$superType];
+
+        $model = new $subclass();
+        $model->superType = $superType;
+        $model->setIsNewRecord(false);
+
+        return $model;
+    }
 
 	/**
 	 * @return string the associated database table name
@@ -123,5 +156,126 @@ class Part extends PaavActiveRecord
         $this->descr = implode(' ', $descrParts);   
 
         return parent::afterFind();
+    }
+
+    /**
+     *
+     * @return
+     */
+    protected static function findSuperType($typeId)
+    {
+        $typeParentId = PartType::getParentId($typeId);
+
+        foreach (array($typeId, $typeParentId) as $type)
+            if (isset(self::$subclasses[$type]))
+                return $type;
+
+        return false;
+    }
+
+}
+
+class GenericPart extends Part
+{
+    /**
+     *
+     */
+    public function init()
+    {
+        $this->superType = Part::TYPE_GENERIC;
+    }
+}
+
+class Fluid extends Part
+{
+	public function rules()
+	{
+		$rules = array(
+			array('name', 'required'),
+			array('name', 'length', 'max'=>50),
+			array('volume', 'numerical', 'min' => 0.01, 'max' => 999.99),
+        );
+
+        return array_merge($rules, parent::rules());
+    }
+
+    /**
+     *
+     */
+    public function init()
+    {
+        $this->superType = Part::TYPE_FLUID;
+    }
+
+	/**
+	 * @return array customized attribute labels (name=>label)
+	 */
+	public function attributeLabels()
+	{
+        $labels = array(
+            'volume' => 'Объем (в литрах)',
+        );
+
+        return array_merge(parent::attributeLabels(), $labels);
+	}
+
+}
+
+class MotorOil extends Fluid
+{
+	public function rules()
+	{
+		$rules = array(
+            array('sae_grade', 'match', 'pattern'=>'/\d{1,2}W-\d{2}/i',
+                'message'=>'Вязкость по SAE должна быть в формате "xxW-xx".'
+            ),
+        );
+
+        return array_merge($rules, parent::rules());
+    }
+
+    /**
+     *
+     */
+    public function init()
+    {
+        $this->superType = Part::TYPE_MOTOR_OIL;
+    }
+
+	/**
+	 * @return array customized attribute labels (name=>label)
+	 */
+	public function attributeLabels()
+	{
+        $labels = array(
+            'sae_grade' => 'Вязкость по SAE',
+        );
+
+        return array_merge(parent::attributeLabels(), $labels);
+	}
+
+    /**
+     *
+     * @return
+     */
+    public function getDescr()
+    {
+        $descr = $this->name;
+
+        if ($this->volume)
+            $descr .= ' ' . $this->volume . ' л';
+
+        return $descr; 
+    }
+}
+
+class Accessory extends Part
+{
+    /**
+     *
+     */
+    public function init()
+    {
+        $this->superType = Part::TYPE_ACCESSORY;
     }
 }

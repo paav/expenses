@@ -96,4 +96,12 @@ class PartType extends PaavActiveRecord
 	{
 		return parent::model($className);
 	}
+
+    public static function getParentId($id)
+    {
+        $model = self::model()->findByPk($id);
+
+        return $model !== null ? (int)$model->parent_id : null;
+    }
+    
 }
