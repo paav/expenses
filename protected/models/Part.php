@@ -173,6 +173,14 @@ class Part extends PaavActiveRecord
         return false;
     }
 
+    /**
+     *
+     * @return
+     */
+    public function getSuperType()
+    {
+        return $this->superType; 
+    }
 
     /**
      *

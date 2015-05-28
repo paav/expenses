@@ -185,4 +185,20 @@ class PartController extends Controller
 			Yii::app()->end();
 		}
 	}
+    
+    /**
+     *
+     * @return
+     */
+    public function typeToView($type)
+    {
+        $views = array(
+            Part::TYPE_GENERIC   => '_generic',
+            Part::TYPE_FLUID     => '_fluid',
+            Part::TYPE_MOTOR_OIL => '_motoroil',
+            Part::TYPE_ACCESSORY => '_accessory',
+        );
+        
+        return $views[$type];
+    }
 }
