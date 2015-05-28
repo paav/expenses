@@ -55,7 +55,7 @@ class Vendor extends CActiveRecord
 	{
 		return array(
 			'id' => 'ID',
-			'name' => 'Name',
+			'name' => 'Производитель',
 		);
 	}
 

@@ -56,7 +56,7 @@ class PartType extends PaavActiveRecord
 	{
 		return array(
 			'id' => 'ID',
-			'name' => 'Наименование',
+			'name' => 'Тип',
 		);
 	}
 

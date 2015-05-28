@@ -97,13 +97,14 @@ class Part extends PaavActiveRecord
 	 */
 	public function attributeLabels()
 	{
-		return array(
-            'part_type_id' => 'Тип',
-			'name' => 'Наименование',
+        return array(
+            'part_type_id' => 'Тип расходного материала',
+            'name'         => 'Название',
             'vendor_id'    => 'Производитель',
-			'part_number' => 'Артикул',
-			'note' => 'Комментарий',
-		);
+            'part_number'  => 'Артикул',
+            'note'         => 'Комментарий',
+            'descr'        => 'Описание',
+        );
 	}
 
 	/**
