@@ -68,8 +68,10 @@ class Part extends PaavActiveRecord
 		return array(
             array('part_type_id, vendor_id', 'required'),
             array('part_type_id, vendor_id', 'numerical', 'integerOnly'=>true,
-                  'min'=>0),
+                'min'=>0),
 			array('note', 'length', 'max'=>500),
+			array('part_number', 'length', 'max'=>50),
+
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
 			array('id, name, manufacturer, part_number, note', 'safe', 'on'=>'search'),
